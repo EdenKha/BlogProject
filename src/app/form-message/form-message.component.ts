@@ -1,19 +1,30 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-form-message',
+  templateUrl: './form-message.component.html',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    NgForOf,
+    NgIf
   ],
-  templateUrl: './form-message.component.html',
-  styleUrl: './form-message.component.css'
+  styleUrls: ['./form-message.component.css']
 })
 export class FormMessageComponent {
+  post = {
+    title: '',
+    message: ''
+  };
+  posts: { title: string; message: string; }[]= [];
 
-  submit(){
-
+  onSubmit() {
+    if (this.post.title && this.post.message) {
+      this.posts.push({...this.post});
+      this.post.title = '';
+      this.post.message = '';
+    }
   }
-
 }
