@@ -1,0 +1,10 @@
+*{
+  background-color: #1F1F2E;
+}
+
+.container{
+  width: 95%;
+  border: 2px solid #000000;
+  border-radius: 20px;
+}
+

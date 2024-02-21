@@ -1,0 +1,46 @@
+*{}
+.container{
+  width: 600px;
+}
+.NomUtilisateur {
+  padding: 5px;
+  font-size: 21px;
+  color : #BEB9CB;
+  text-align: left;
+}
+.Date{
+  text-align: right;
+  font-size: 9px;
+  color : #BEB9CB;
+}
+
+.Titre{
+  font-size: 21px;
+  background-color: #1F1F2E;
+}
+
+.Contenu{
+  margin-bottom: 10px;
+  border: 2px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #1F1F2E;
+}
+.Message {
+  background-color: #1F1F2E;
+  font-size: 15px;
+  padding-top: 20px;
+}
+
+h1, h2, p {
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+
