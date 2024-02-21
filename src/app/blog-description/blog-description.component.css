@@ -1,8 +1,11 @@
 *{
+  height: 20%;
   background-color: #1F1F2E;
 }
 
 .container{
+  margin-right: 5%;
+  margin-top: 25px;
   width: 95%;
   border: 2px solid #000000;
   border-radius: 20px;

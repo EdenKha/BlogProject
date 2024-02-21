@@ -1,9 +1,17 @@
-*{}
-.container{
-  width: 600px;
+*{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #2B2736;
+
 }
+.container{
+  width: 80%;
+  justify-content: flex-start;
+  scrollbar-track-color: pink;
+}
+
 .NomUtilisateur {
-  padding: 5px;
   font-size: 21px;
   color : #BEB9CB;
   text-align: left;
@@ -29,7 +37,6 @@
 .Message {
   background-color: #1F1F2E;
   font-size: 15px;
-  padding-top: 20px;
 }
 
 h1, h2, p {
