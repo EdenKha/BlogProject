@@ -1,0 +1,12 @@
+.splitbody {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.splitright {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
