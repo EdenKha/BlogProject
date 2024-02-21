@@ -1,0 +1,38 @@
+
+
+.NomUtilisateur,.Date {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.Titre,.Contenu, .Message {
+  margin-bottom: 10px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+h1, h2, p {
+  margin: 0;
+}
+
+.NomUtilisateur h1 {
+  font-family: 'Algerian';
+  color: #333;
+}
+
+.Titre h2 {
+  font-family: 'Arial Black', sans-serif;
+}
+
+.Message p {
+  font-family: 'Times New Roman', serif;
+}
+
+.Date p {
+  color: #777;
+  font-family: 'Algerian';
+}
