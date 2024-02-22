@@ -6,10 +6,12 @@
 }
 .container{
   width: 80%;
-  max-height: 575px;
+  max-height: 595px;
   justify-content: flex-start;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-track-color: pink;
+  margin-bottom: 0;
 }
 
 

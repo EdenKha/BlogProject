@@ -1,18 +1,20 @@
 <link rel="stylesheet" href="form-message.component.css">
 <div class="post">
-  <h1 style="background-color:#1F1F2E; font-size: 25px">Poster un nouveau message !</h1>
+  <!--<h1 style="background-color:#1F1F2E; font-size: 25px">Poster un nouveau message !</h1>-->
   <form style="background-color:#1F1F2E"(ngSubmit)="onSubmit()">
-    <label for="title">Title:</label>
+    <!--<label for="title">Title:</label>-->
     <input placeholder="Écrivez votre titre" class="title" type="text" id="title" [(ngModel)]="post.title" name="title" required>
     <br>
-    <label  for="message">Message:</label>
+    <!--<label  for="message">Message:</label>-->
     <textarea placeholder="Écrivez votre message" class="message" id="message" [(ngModel)]="post.message" name="message" required></textarea>
     <br>
-    <button type="submit">Envoyer</button>
+    <div class="button-position">
+      <button type="submit">Envoyer</button>
+    </div>
   </form>
-  <h2>Tous les postes :</h2>
+  <!--<h2>Tous les postes :</h2>
   <div *ngFor="let post of posts">
     <h3>{{ post.title }}</h3>
     <p>{{ post.message }}</p>
-  </div>
+  </div>-->
 </div>
