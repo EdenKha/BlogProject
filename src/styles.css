@@ -5,9 +5,8 @@
   background-color: #2B2736;
   font-family: Metrophobic;
   color: white;
-  height: 100%;
 }
 
-html {
-  overflow: hidden;
+body {
+  max-height: 500px;
 }

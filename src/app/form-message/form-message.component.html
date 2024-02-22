@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="form-message.component.css">
 <div class="post">
-  <h1 style="background-color:#1F1F2E">Poster un nouveau message !</h1>
+  <h1 style="background-color:#1F1F2E; font-size: 25px">Poster un nouveau message !</h1>
   <form style="background-color:#1F1F2E"(ngSubmit)="onSubmit()">
     <label for="title">Title:</label>
     <input placeholder="Écrivez votre titre" class="title" type="text" id="title" [(ngModel)]="post.title" name="title" required>
