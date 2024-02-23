@@ -5,8 +5,8 @@
 
 }
 .container{
-  width: 80%;
-  max-height: 595px;
+  width: 85%;
+  height: 85vh;
   justify-content: flex-start;
   overflow-y: auto;
   overflow-x: hidden;

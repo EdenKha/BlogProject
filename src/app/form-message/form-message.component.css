@@ -13,18 +13,18 @@ label{
 
 .message{
   background-color: #1C1C21;
-  height: 230px;
+  height: 35vh;
   font-size: 14px;
   border-color: transparent;
   color: #FFFFFF;
-  margin: 10px 0;
   padding: 10px;
   border-radius: 15px;
   resize: none;
 }
 .title{
+  height: 6vh;
   background-color: #1C1C21;
-  font-size: 14px;
+  font-size: 16px;
   color: #FFFFFF;
   margin: 10px 0;
   padding: 10px;
@@ -34,7 +34,6 @@ label{
 
 .post{
   vertical-align: middle;
-  height: 60%;
   width: 95%;
   background-color: #1F1F2E;
   color: white;
@@ -42,17 +41,17 @@ label{
   border: 2px solid #000000;
   border-radius: 20px;
   margin-top: 5%;
-  margin-bottom: 10%;
+  overflow-y: auto;
 }
 
 button{
   width: 25%;
   border-radius: 5%;
-  text-align: center;
   background-color: #000000;
 }
 
 .button-position{
   background-color: #1F1F2E;
   align-items: end;
+  margin-top: 5vh;
 }
