@@ -3,24 +3,12 @@
 </div>
 
 <div class = 'Contenu'>
-  <div>
-    <h1 class="Titre">Javafx me clc</h1>
-  </div>
-
-  <div>
-    <p class="Message">Karmine Corpqdzibqdbqdbqdibqdbhqdbhkqvdhqvdhqvhdvqdqdq
-      bbdqjbzqbdkjqbdkjbqjdbqjldbjlqdbmqdq
-      qzdjbadbqzbdazbdjazbdljqzdqazkdvqzhjdvazhdaz
-      dnabdiabdiabzdiubadbazudhazdazudbazkujdbaz
-      zdqdqzdjhqvdhjqzvhdbqzhkjdbqjzdbjlqzbdjlqzbdjbzda
-      dhjadahdbazbduazbuodbauodbaozbdazda
-      adjbazhidazbdhiazbduazbdobazodbazda
-      azhdvavdiyazvdihazbduoazodtbrbrt
-    </p>
+  <div *ngFor="let message of messages">
+    <h3>{{ message.title }}</h3>
+    <p>{{ message.message }}</p>
   </div>
 </div>
 
 <div class="Date">
   <p class="police-date">21/02/2024  9:50</p>
 </div>
-
