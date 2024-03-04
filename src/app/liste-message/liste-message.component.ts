@@ -1,7 +1,7 @@
- import { Component } from '@angular/core';
- import {RouterLink} from "@angular/router";
- import {MessageComponent} from "../message/message.component";
- import {FormMessageComponent} from "../form-message/form-message.component";
+import { Component } from '@angular/core';
+import {RouterLink} from "@angular/router";
+import {MessageComponent} from "../message/message.component";
+import {FormMessageComponent} from "../form-message/form-message.component";
 
 
 @Component({
@@ -16,5 +16,4 @@
   styleUrl: './liste-message.component.css'
 })
 export class ListeMessageComponent {
-
 }
