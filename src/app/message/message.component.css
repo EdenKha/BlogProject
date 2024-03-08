@@ -19,6 +19,7 @@
 }
 
 .Contenu{
+  min-width: 450px;
   margin: 0;
   border: 2px solid black;
   padding: 8px;
