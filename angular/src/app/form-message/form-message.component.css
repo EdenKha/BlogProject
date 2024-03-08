@@ -1,0 +1,57 @@
+*{
+  flex-direction: column;
+  display: flex;
+}
+
+div{
+  text-align: center;
+}
+
+label{
+  text-align: left;
+}
+
+.message{
+  background-color: #1C1C21;
+  height: 35vh;
+  font-size: 14px;
+  border-color: transparent;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius: 15px;
+  resize: none;
+}
+.title{
+  height: 6vh;
+  background-color: #1C1C21;
+  font-size: 16px;
+  color: #FFFFFF;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 15px;
+  border-color: transparent;
+}
+
+.post{
+  vertical-align: middle;
+  width: 95%;
+  background-color: #1F1F2E;
+  color: white;
+  padding: 10px;
+  border: 2px solid #000000;
+  border-radius: 20px;
+  margin-top: 5%;
+  overflow-y: auto;
+}
+
+button{
+  width: 25%;
+  border-radius: 5%;
+  background-color: #000000;
+}
+
+.button-position{
+  background-color: #1F1F2E;
+  align-items: end;
+  margin-top: 5vh;
+}

@@ -1,0 +1,14 @@
+.splitbody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.splitright {
+  margin-top: 15px;
+  flex-direction: column;
+  width: 40%;
+}
+
+
