@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
 import {MessageService} from "../message.service";
 
@@ -11,13 +11,12 @@ import {MessageService} from "../message.service";
   templateUrl: './message.component.html',
   styleUrl: './message.component.css'
 })
-export class MessageComponent{
+export class MessageComponent implements OnInit{
+  @Input() message: any;
 
-  messages: any[] = [];
-
-  constructor(private messageService: MessageService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.messageService.currentMessages.subscribe(messages => this.messages = messages);
+
   }
 }
