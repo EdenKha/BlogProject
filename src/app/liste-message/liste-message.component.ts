@@ -26,4 +26,11 @@ export class ListeMessageComponent {
   ngOnInit() {
     this.messageService.currentMessages.subscribe(messages => this.messages = messages);
   }
+
+  removeMessage(index: number) {
+    this.messages.splice(index, 1);
+    this.messageService.setMessages(this.messages);
+  }
+
+
 }

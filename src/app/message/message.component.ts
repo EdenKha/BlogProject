@@ -13,10 +13,12 @@ import {MessageService} from "../message.service";
 })
 export class MessageComponent implements OnInit{
   @Input() message: any;
+  @Input() index: any;
 
-  constructor() { }
+  constructor(private messageService : MessageService) {}
 
   ngOnInit() {
-
   }
+
+
 }

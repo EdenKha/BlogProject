@@ -21,7 +21,7 @@ export class FormMessageComponent {
 
   onSubmit() {
     if (this.post.title && this.post.message) {
-      this.posts.push({ ...this.post });
+      this.posts.unshift({ ...this.post });
       this.post.title = '';
       this.post.message = '';
       this.messageService.setMessages(this.posts);
