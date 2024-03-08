@@ -1,3 +1,4 @@
-<div *ngFor="let message of messages">
-  <app-message [message]=message></app-message>
+<div *ngFor="let message of messages; let i = index" >
+  <button (click)="removeMessage(i)">remove</button>
+  <app-message [message]=message [index]=i></app-message>
 </div>
