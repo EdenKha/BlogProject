@@ -14,10 +14,13 @@ import {MessageService} from "../message.service";
 export class MessageComponent implements OnInit{
   @Input() message: any;
   @Input() index: any;
+  currentDateTime: string = '';
 
   constructor(private messageService : MessageService) {}
 
   ngOnInit() {
+      const currentDate = new Date();
+      this.currentDateTime = currentDate.toLocaleString();
   }
 
 
