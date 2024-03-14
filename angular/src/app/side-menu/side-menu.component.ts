@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
+import {AjoutBlogComponent} from "../ajout-blog/ajout-blog.component";
+import {DialogService} from "../ajout-blog/ajout-blog.service";
 
 @Component({
   selector: 'app-side-menu',
@@ -8,5 +11,17 @@ import { Component } from '@angular/core';
   styleUrl: './side-menu.component.css'
 })
 export class SideMenuComponent {
+  constructor(
+    public dialog: MatDialog,
+    private dialogService: DialogService
+  ) {}
 
+  openDialog(): void {
+    if (!this.dialogService.isDialogCurrentlyOpen()) {
+      const dialogRef = this.dialog.open(AjoutBlogComponent);
+      dialogRef.afterClosed().subscribe(() => {
+        console.log('The dialog was closed');
+      });
+    }
+  }
 }
