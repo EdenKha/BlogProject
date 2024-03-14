@@ -48,6 +48,7 @@ button{
   width: 25%;
   border-radius: 5%;
   background-color: #000000;
+  overflow: hidden;
 }
 
 .button-position{

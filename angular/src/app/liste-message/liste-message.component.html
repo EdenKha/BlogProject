@@ -1,4 +1,5 @@
-<div *ngFor="let message of messages; let i = index" >
-  <button (click)="removeMessage(i)">remove</button>
+<div class="liste" *ngFor="let message of messages; let i = index" >
+  <button (click)="removeMessage(i)">x</button>
   <app-message [message]=message [index]=i></app-message>
 </div>
+

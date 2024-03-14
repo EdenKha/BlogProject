@@ -17,11 +17,12 @@ export class FormMessageComponent {
   };
   posts: { title: string; message: string }[] = [];
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) {
+  }
 
   onSubmit() {
     if (this.post.title && this.post.message) {
-      this.posts.unshift({ ...this.post });
+      this.posts.unshift({...this.post});
       this.post.title = '';
       this.post.message = '';
       this.messageService.setMessages(this.posts);

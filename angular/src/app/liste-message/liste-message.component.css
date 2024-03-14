@@ -1,19 +1,17 @@
 *{
+  display: block;
   margin-top: 10px;
   flex-direction: column;
   background-color: #2B2736;
 
 }
-.container{
-  width: 85%;
-  height: 85vh;
-  justify-content: flex-start;
-  overflow-y: auto;
-  overflow-x: hidden;
+.liste{
+  margin-left: 10px;
+  min-width: 500px;
   scrollbar-track-color: pink;
   margin-bottom: 0;
+  overflow: auto;
 }
-
 
 
 /* width */

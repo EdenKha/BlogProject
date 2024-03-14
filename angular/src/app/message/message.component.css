@@ -2,6 +2,9 @@
   font-size: 21px;
   color : #BEB9CB;
   text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .Date{
   text-align: right;
@@ -19,12 +22,13 @@
 }
 
 .Contenu{
-  min-width: 450px;
   margin: 0;
   border: 2px solid black;
   padding: 8px;
   border-radius: 5px;
   background-color: #1F1F2E;
+  overflow: auto;
+  max-width: 500px;
 }
 .Message {
   background-color: #1F1F2E;
@@ -33,4 +37,8 @@
 
 h1, h2, p {
   margin: 0;
+}
+
+h3 {
+
 }

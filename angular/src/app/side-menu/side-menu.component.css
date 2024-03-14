@@ -11,3 +11,8 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+button{
+  float: right;
+  border-radius: 10px;
+}
