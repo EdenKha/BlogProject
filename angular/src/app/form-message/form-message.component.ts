@@ -1,31 +1,35 @@
 import {Component, Input} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
-import { MessageService } from '../message.service';
+import { MessageService } from '../../services/message.service';
+import {Message} from "../../models/message.model";
 
 @Component({
   selector: 'app-form-message',
   templateUrl: './form-message.component.html',
   standalone: true,
   imports: [FormsModule, NgForOf, NgIf],
-  styleUrls: ['./form-message.component.css'],
+  styleUrls: ['./form-message.component.css']
 })
 export class FormMessageComponent {
-  post = {
+  post: Message = {
+    id: 0,
+    author: '',
     title: '',
-    message: '',
+    content: '',
+    date: '',
   };
-  posts: { title: string; message: string }[] = [];
+  messages: Message[] = [];
 
   constructor(private messageService: MessageService) {
   }
 
   onSubmit() {
-    if (this.post.title && this.post.message) {
-      this.posts.unshift({...this.post});
+    if (this.post.title && this.post.content) {
+      this.messages.unshift({...this.post});
       this.post.title = '';
-      this.post.message = '';
-      this.messageService.setMessages(this.posts);
+      this.post.content = '';
+      this.messageService.setMessages(this.messages);
     }
   }
 }

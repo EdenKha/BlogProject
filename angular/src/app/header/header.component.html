@@ -1,3 +1,10 @@
 <header>
   <label>Projet WEB : Blog</label>
+  <nav>
+    <!-- Autres éléments de navigation -->
+    <button (click)="toggleLoginForm()">Connexion</button>
+  </nav>
+
+  <!-- Affichage du formulaire de connexion en fonction de showLoginForm -->
+  <app-login> *ngIf="showLoginForm"></app-login>
 </header>

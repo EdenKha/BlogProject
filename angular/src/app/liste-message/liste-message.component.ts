@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {MessageComponent} from "../message/message.component";
 import {FormMessageComponent} from "../form-message/form-message.component";
 import {NgForOf} from "@angular/common";
-import {MessageService} from "../message.service";
+import {MessageService} from "../../services/message.service";
 
 
 @Component({

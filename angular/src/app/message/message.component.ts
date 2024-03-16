@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {MessageService} from "../message.service";
+import {MessageService} from "../../services/message.service";
+import {Message} from "../../models/message.model"
+import {Utilisateur} from "../../models/utilisateur.model";
 
 @Component({
   selector: 'app-message',
@@ -11,18 +13,24 @@ import {MessageService} from "../message.service";
   templateUrl: './message.component.html',
   styleUrl: './message.component.css'
 })
+
+
+
 export class MessageComponent implements OnInit{
-  @Input() message: any;
+  @Input() message!: Message;
   @Input() index: any;
-  currentDateTime: string = '';
+  utilisateur!: Utilisateur;
+
 
   constructor(private messageService : MessageService) {}
 
   ngOnInit() {
+    if (this.message) {
       const currentDate = new Date();
-      this.currentDateTime = currentDate.toLocaleString();
+      this.message.date = currentDate.toLocaleString();
+    }
   }
 
-
-
 }
+
+

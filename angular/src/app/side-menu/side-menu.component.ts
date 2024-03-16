@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AjoutBlogComponent} from "../ajout-blog/ajout-blog.component";
-import {DialogService} from "../ajout-blog/ajout-blog.service";
+import {DialogService} from "../../services/ajout-blog.service";
 
 @Component({
   selector: 'app-side-menu',
