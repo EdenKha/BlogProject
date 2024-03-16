@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subject} from "rxjs";
+import {Blog} from "../models/blog.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
   private isDialogOpen = false;
-  private blogsSource = new BehaviorSubject<any[]>([]);
-  currentMessages = this.blogsSource.asObservable();
-  private functionCallSource = new Subject<void>();
-  functionCall$ = this.functionCallSource.asObservable();
+  private blogsSubject = new BehaviorSubject<Blog[]>([]);
+  blogs$ = this.blogsSubject.asObservable();
 
   constructor() {}
 
@@ -21,7 +20,7 @@ export class DialogService {
     this.isDialogOpen = state;
   }
 
-  setBlogs(blogs: any[]) {
-    this.blogsSource.next(blogs);
+  updateBlogs(blogs: Blog[]): void {
+    this.blogsSubject.next(blogs);
   }
 }

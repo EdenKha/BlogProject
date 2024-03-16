@@ -36,7 +36,7 @@ export class AjoutBlogComponent {
       this.blogs.unshift({...this.blog});
       this.blog.title = '';
       this.blog.desc = '';
-      this.dialogService.setBlogs(this.blogs);
+      this.dialogService.updateBlogs(this.blogs);
       this.close();
     }
   }

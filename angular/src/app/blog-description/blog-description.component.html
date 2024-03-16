@@ -1,8 +1,8 @@
 <div class="container">
   <div>
-    <h3>{{ blog.title }}</h3>
+    <h3>{{ blog?.title || 'Aucun blog crée' }}</h3>
   </div>
   <div>
-    <p>{{ blog.desc }}</p>
+    <p>{{ blog?.desc || '' }}</p>
   </div>
 </div>

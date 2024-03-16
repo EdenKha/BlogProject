@@ -4,6 +4,7 @@ import {MessageComponent} from "../message/message.component";
 import {FormMessageComponent} from "../form-message/form-message.component";
 import {NgForOf} from "@angular/common";
 import {MessageService} from "../../services/message.service";
+import {Message} from "../../models/message.model";
 
 
 @Component({
@@ -19,7 +20,7 @@ import {MessageService} from "../../services/message.service";
   styleUrl: './liste-message.component.css'
 })
 export class ListeMessageComponent {
-  messages: any[] = [];
+  messages: Message[] = [];
 
   constructor(private messageService: MessageService) { }
 
