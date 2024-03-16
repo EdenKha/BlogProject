@@ -17,7 +17,7 @@ import {DataService} from "../../services/data.service"; // Assurez-vous d'avoir
 })
 
 export class LoginComponent {
-  user: User = {
+    user: User = {
     id: 0,
     firstname: '',
     lastname: '',
@@ -35,10 +35,13 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.loginService.setDialogOpenState(true);
-    this.dataService.currentUser.subscribe(users => this.users = users);
+    this.dataService.currentUser.subscribe(users => {
+      this.users = users;
+    });
   }
 
   submitForm() {
+    this.user.id = this.dataService.getNextUserId();
     this.users.push({...this.user});
     this.dataService.updateUsers(this.users);
     console.log('Données du formulaire : ', this.user);

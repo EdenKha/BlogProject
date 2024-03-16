@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Blog} from "../../models/blog.model";
-import {NgForOf} from "@angular/common";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-blog',
@@ -13,5 +13,16 @@ export class BlogComponent {
 
   @Input() blog!: Blog;
   @Input() index!: number;
+  userId!: string | null;
+  blogId!: string | null;
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.userId = params.get('userId');
+      this.blogId = params.get('blogId');
+    });
+  }
 
 }

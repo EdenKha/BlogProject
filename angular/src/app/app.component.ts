@@ -8,6 +8,9 @@ import {BlogDescriptionComponent} from "./blog-description/blog-description.comp
 import {ApiService} from "../services/api.service";
 import {Blog} from "../models/blog.model";
 import {NgForOf} from "@angular/common";
+import {DialogService} from "../services/dialog.service";
+import {LoginComponent} from "./login/login.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-root',
@@ -28,10 +31,16 @@ export class AppComponent implements OnInit {
 
   message: any;
 
-  constructor(private apiService: ApiService) { };
+  constructor(public dialog: MatDialog,private loginService: DialogService, private apiService: ApiService) { };
   ngOnInit() {
     this.apiService.getMessage().subscribe(data => {
       this.message = data;
     });
+    if (!this.loginService.isDialogCurrentlyOpen()) {
+      const dialogRef = this.dialog.open(LoginComponent);
+      dialogRef.afterClosed().subscribe(() => {
+        console.log('The dialog was closed');
+      });
+    }
   }
 }

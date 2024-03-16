@@ -40,7 +40,7 @@ export class HeaderComponent {
     }
   }
 
-  openLogin(): void {
+  public openLogin(): void {
     if (!this.loginService.isDialogCurrentlyOpen()) {
       const dialogRef = this.dialog.open(LoginComponent);
       dialogRef.afterClosed().subscribe(() => {

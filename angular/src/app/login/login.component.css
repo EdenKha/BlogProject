@@ -1,10 +1,60 @@
 .login {
   position: fixed;
+  background-color: #1F1F2E;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 3px solid #000;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  width: calc(33.333%); /* Réduire la largeur de la fenêtre d'un tiers */
+}
+
+.login form {
+  /* Aligner les champs de formulaire à droite */
+  text-align: right;
+}
+
+.login form div {
+  /* Empêcher le texte de s'étendre sur toute la largeur */
+  display: inline-block;
+  width: 100%; /* Assurez-vous que les éléments internes prennent toute la largeur */
+}
+
+.login form div label {
+  /* Ajuster la largeur des étiquettes */
+  width: 120px; /* Largeur fixe des étiquettes pour un alignement uniforme */
+  display: inline-block;
+  text-align: left; /* Aligner le texte des étiquettes à gauche */
+}
+
+.login form div input {
+  /* Ajuster la largeur des champs de saisie */
+  width: calc(100% - 130px); /* Largeur ajustée des champs de saisie, tenir compte de la largeur des étiquettes */
+}
+
+.login button[type="submit"] {
+  /* Centrer le bouton de connexion */
+  display: block; /* Assurez-vous que le bouton occupe toute la largeur */
+  margin: 20px auto 0; /* Centrer le bouton horizontalement avec une marge en haut */
+}
+
+h2, form, label, div{
+  background-color: #1F1F2E;
+}
+
+input{
+  margin-bottom: 20px;
+}
+
+button{
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.close-btn{
+  float: right;
+  background-color: #000000;
+  overflow: hidden;
 }

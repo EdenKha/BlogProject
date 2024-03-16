@@ -8,10 +8,11 @@
 
 .boutonblog{
   min-width: 150px;
+
 }
 
 button{
-  float: right;
+  margin-left: 20%;
   border-radius: 10px;
 }
 

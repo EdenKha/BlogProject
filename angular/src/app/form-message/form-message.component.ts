@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
 import {Message} from "../../models/message.model";
 import {DataService} from "../../services/data.service";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-form-message',
@@ -22,16 +23,49 @@ export class FormMessageComponent {
     date: '',
   };
   messages: Message[] = [];
+  currentUser!: User;
 
   constructor(private dataService: DataService) {
+    this.loadCurrentUser()
   }
 
   onSubmit() {
-    if (this.post.title && this.post.content) {
-      this.messages.unshift({...this.post});
+    // Vérifiez si un utilisateur est défini
+    if (!this.currentUser) {
+      console.warn("Aucun utilisateur défini. Utilisation de 'unknown' comme auteur du message.");
+      // Si aucun utilisateur n'est défini, utilisez "unknown" comme auteur du message
+      this.post.author = "unknown";
+    } else {
+      // Si un utilisateur est défini, utilisez son firstname comme auteur du message
+      this.post.author = this.currentUser.firstname;
+      // Générer un nouvel ID pour le message
+      this.post.id = this.dataService.getNextMessageId();
+
+      // Ajouter le message à la liste des messages
+      this.messages.unshift({ ...this.post });
+
+      // Réinitialiser les champs du formulaire
       this.post.title = '';
       this.post.content = '';
+
+      // Mettre à jour la liste des messages dans le service DataService
       this.dataService.updateMessages(this.messages);
     }
+
+    // Assurez-vous que les champs title et content sont remplis
+    if (!this.post.title || !this.post.content) {
+      console.error("Erreur: Les champs title et content doivent être remplis.");
+      return;
+    }
+
+  }
+
+  loadCurrentUser() {
+    // Récupérer le dernier utilisateur du flux currentUser
+    this.dataService.currentUser.subscribe(users => {
+      if (users && users.length > 0) {
+        this.currentUser = users[users.length - 1];
+      }
+    });
   }
 }

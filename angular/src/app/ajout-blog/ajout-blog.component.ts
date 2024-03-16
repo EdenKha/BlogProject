@@ -31,8 +31,10 @@ export class AjoutBlogComponent {
 
   onSubmit(): void {
     if (this.blog.title && this.blog.desc) {
+      this.blog.id = this.dataService.getNextBlogId();
       this.blogs.push({...this.blog});
       this.dataService.updateBlogs(this.blogs);
+      console.log('Données du formulaire : ', this.blog);
       this.closeAddBlog();
     }
   }

@@ -1,9 +1,11 @@
 <div class="ajoutblog">
   <button class="close-btn" mat-button (click)="closeAddBlog()">Close</button>
   <h3>Créer un blog</h3>
-  <input placeholder="Entrez un nom de blog" [(ngModel)]="blog.title">
-  <input placeholder="Entrez une description" [(ngModel)]="blog.desc">
-  <button (click)="onSubmit()">Créer</button>
+  <div class="create">
+    <input placeholder="Entrez un nom de blog" [(ngModel)]="blog.title">
+    <textarea class="desc" placeholder="Entrez une description" [(ngModel)]="blog.desc"></textarea>
+    <button class="cre" (click)="onSubmit()">Créer</button>
+  </div>
   <h3>Rejoindre un blog</h3>
   <input placeholder="Entrez un nom d'utilisateur">
   <button>Ajouter</button>
