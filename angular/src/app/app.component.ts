@@ -7,6 +7,8 @@ import {ListeMessageComponent} from "./liste-message/liste-message.component";
 import {BlogDescriptionComponent} from "./blog-description/blog-description.component";
 import {ApiService} from "../services/api.service";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/compiler";
+import {Blog} from "../models/blog.model";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,8 @@ import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/compiler";
     BlogDescriptionComponent,
     ListeMessageComponent,
     SideMenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    NgForOf
   ],
   styleUrls: ['./app.component.css'],
   standalone: true
@@ -24,15 +27,11 @@ import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/compiler";
 export class AppComponent implements OnInit {
   title = 'frontEnd';
   message: any;
+  blogs!: Blog[];
+
   constructor(private apiService: ApiService) { };
   ngOnInit() {
     this.apiService.getMessage().subscribe(data => {
-      this.message = data;
-    });
-  }
-
-  onClick() {
-    this.apiService.sendMessage({title: 'Hello World'}).subscribe(data => {
       this.message = data;
     });
   }

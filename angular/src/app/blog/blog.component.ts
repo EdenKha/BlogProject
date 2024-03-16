@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Blog} from "../../models/blog.model";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-blog',
-  standalone: true,
-  imports: [],
   templateUrl: './blog.component.html',
-  styleUrl: './blog.component.css'
+  standalone: true,
+  styleUrls: ['./blog.component.css']
 })
+
 export class BlogComponent {
-  blog!: Blog;
+  @Input() blog!: Blog;
+  @Input() index!: any;
 
 }

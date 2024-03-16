@@ -1,5 +1,6 @@
 <header>
   <label>Projet WEB : Blog</label>
+  <h5>Connecté sur la session de {{user?.firstname || '(pas connecté)'}}</h5>
     <!-- Autres éléments de navigation -->
-  <button (click)="toggleLoginForm()">Connexion</button>
+  <button (click)="openLogin()">Connexion</button>
 </header>

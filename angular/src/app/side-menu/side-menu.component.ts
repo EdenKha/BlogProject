@@ -11,7 +11,8 @@ import {Blog} from "../../models/blog.model";
   standalone: true,
   imports: [
     NgForOf,
-    BlogComponent
+    BlogComponent,
+    AjoutBlogComponent
   ],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.css'
@@ -23,6 +24,10 @@ export class SideMenuComponent {
     private dialogService: DialogService
   ) {}
 
+  ngOnInit() {
+    this.dialogService.currentBlogs.subscribe(blogs => this.blogs = blogs);
+  }
+
   openDialog(): void {
     if (!this.dialogService.isDialogCurrentlyOpen()) {
       const dialogRef = this.dialog.open(AjoutBlogComponent);
@@ -31,4 +36,5 @@ export class SideMenuComponent {
       });
     }
   }
+
 }

@@ -1,8 +1,11 @@
 <div class="container">
   <div>
-    <h3>{{ blog?.title || 'Aucun blog crée' }}</h3>
+    <h3>{{ blog?.title || 'Aucun titre' }}</h3>
   </div>
   <div>
-    <p>{{ blog?.desc || '' }}</p>
+    <p>{{ blog?.desc || 'Aucune description' }}</p>
   </div>
+</div>
+<div *ngIf="!blog">
+  <p>Aucun blog créé.</p>
 </div>
