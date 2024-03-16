@@ -10,7 +10,8 @@ import {NgForOf} from "@angular/common";
 })
 
 export class BlogComponent {
+
   @Input() blog!: Blog;
-  @Input() index!: any;
+  @Input() index!: number;
 
 }

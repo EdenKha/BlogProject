@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import {LoginComponent} from "../login/login.component";
-import {Utilisateur} from "../../models/utilisateur.model";
-import {AjoutBlogComponent} from "../ajout-blog/ajout-blog.component";
+import {User} from "../../models/user.model";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogService} from "../../services/ajout-blog.service";
-import {LoginService} from "../../services/login.service";
-import {Blog} from "../../models/blog.model";
-import {UserService} from "../../services/user.service";
+import {DataService} from "../../services/data.service";
+import {DialogService} from "../../services/dialog.service";
 
 @Component({
   selector: 'app-header',
@@ -17,18 +14,19 @@ import {UserService} from "../../services/user.service";
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
-  users: Utilisateur[] = [];
-  user: Utilisateur | null = null;
 
+export class HeaderComponent {
+
+  users: User[] = [];
+  user: User | null = null;
 
   constructor(public dialog: MatDialog,
-              private loginService: LoginService,
-              private userService: UserService) {
+              private loginService: DialogService,
+              private dataService: DataService) {
   }
 
   ngOnInit(): void {
-    this.userService.currentUser.subscribe(users => {
+    this.dataService.currentUser.subscribe(users => {
       this.users = users;
       this.updateCurrentUser();
     });
@@ -50,4 +48,5 @@ export class HeaderComponent {
       });
     }
   }
+
 }

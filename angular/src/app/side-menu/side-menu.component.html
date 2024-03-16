@@ -1,4 +1,6 @@
 <div class="liste" *ngFor="let title of blogs; let i = index">
   <app-blog [blog]=title [index]=i></app-blog>
 </div>
-<button class="ajoutblog" mat-button (click)="openDialog()">+</button>
+<div class="boutonblog">
+  <button mat-button (click)="openDialog()">+</button>
+</div>

@@ -1,10 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf} from "@angular/common";
-import {MessageService} from "../../services/message.service";
 import {Message} from "../../models/message.model"
-import {Utilisateur} from "../../models/utilisateur.model";
-import {UserService} from "../../services/user.service";
+import {User} from "../../models/user.model";
 import {take} from "rxjs";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-message',
@@ -21,12 +20,12 @@ import {take} from "rxjs";
 export class MessageComponent implements OnInit{
   @Input() message!: Message;
   @Input() index: any;
-  currentUser: Utilisateur | undefined;
+  currentUser: User | undefined;
 
 
 
 
-  constructor(private userService: UserService) {
+  constructor(private dataService: DataService) {
     this.loadCurrentUser()
   }
 
@@ -38,7 +37,7 @@ export class MessageComponent implements OnInit{
   }
 
   loadCurrentUser() {
-    this.userService.currentUser.pipe(take(1)).subscribe(users => {
+    this.dataService.currentUser.pipe(take(1)).subscribe(users => {
       if (users && users.length > 0) {
         this.currentUser = users[users.length - 1];
       }

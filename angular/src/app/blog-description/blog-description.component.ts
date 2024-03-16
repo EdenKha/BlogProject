@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from "../../models/blog.model";
-import { DialogService } from "../../services/ajout-blog.service";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-blog-description',
@@ -12,10 +12,10 @@ export class BlogDescriptionComponent implements OnInit {
   blogs: Blog[] = [];
   blog: Blog | null = null;
 
-  constructor(private dialogService: DialogService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.dialogService.currentBlogs.subscribe(blogs => {
+    this.dataService.currentBlogs.subscribe(blogs => {
       this.blogs = blogs;
       this.updateCurrentBlog();
     });

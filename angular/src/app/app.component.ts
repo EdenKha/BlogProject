@@ -6,7 +6,6 @@ import {HeaderComponent} from "./header/header.component";
 import {ListeMessageComponent} from "./liste-message/liste-message.component";
 import {BlogDescriptionComponent} from "./blog-description/blog-description.component";
 import {ApiService} from "../services/api.service";
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/compiler";
 import {Blog} from "../models/blog.model";
 import {NgForOf} from "@angular/common";
 
@@ -24,10 +23,10 @@ import {NgForOf} from "@angular/common";
   styleUrls: ['./app.component.css'],
   standalone: true
 })
+
 export class AppComponent implements OnInit {
-  title = 'frontEnd';
+
   message: any;
-  blogs!: Blog[];
 
   constructor(private apiService: ApiService) { };
   ngOnInit() {

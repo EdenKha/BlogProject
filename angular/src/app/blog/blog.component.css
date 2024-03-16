@@ -3,4 +3,13 @@
   background-color: #181829;
   min-width: 150px;
   margin-bottom: 2px;
+  padding-left: 15px;
+}
+
+button{
+  text-align: left;
+}
+
+button:hover {
+  text-decoration: underline;
 }

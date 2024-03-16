@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Utilisateur } from '../../models/utilisateur.model';
+import { User } from '../../models/user.model';
 import {FormsModule} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
-import {DialogService} from "../../services/ajout-blog.service";
+import {DialogService} from "../../services/dialog.service";
 import {HttpClient} from "@angular/common/http";
-import {LoginService} from "../../services/login.service";
-import {UserService} from "../../services/user.service"; // Assurez-vous d'avoir une interface User définie
+import {DataService} from "../../services/data.service"; // Assurez-vous d'avoir une interface User définie
 
 @Component({
   selector: 'app-login',
@@ -16,45 +15,39 @@ import {UserService} from "../../services/user.service"; // Assurez-vous d'avoir
   ],
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent {
-  user: Utilisateur = {
+  user: User = {
     id: 0,
     firstname: '',
     lastname: '',
     mail: '',
     phone: '',
-    idblog: 0,
+    blogs: [],
   };
+  users!: User[];
 
-  users!: Utilisateur[];
   constructor(public loginRef: MatDialogRef<LoginComponent>,
-              private loginService: LoginService,
-              private userService: UserService,
+              private loginService: DialogService,
+              private dataService: DataService,
               private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.loginService.setDialogOpenState(true);
-    this.userService.currentUser.subscribe(users => this.users = users);
+    this.dataService.currentUser.subscribe(users => this.users = users);
   }
 
   submitForm() {
     this.users.push({...this.user});
-    this.userService.updateUser(this.users);
+    this.dataService.updateUsers(this.users);
     console.log('Données du formulaire : ', this.user);
-    this.close();
+    this.closeLogin();
   }
 
-  /*addUser(newUser: Utilisateur): void {
-    this.http.post('http://localhost:3000/api/users', newUser).subscribe(response => {
-      console.log('Nouveau blog ajouté avec succès !', response);
-    }, error => {
-      console.error('Erreur lors de l\'ajout du blog :', error);
-    });
-  }*/
-
-  close(): void {
+  closeLogin(): void {
     this.loginService.setDialogOpenState(false);
     this.loginRef.close();
   }
+
 }

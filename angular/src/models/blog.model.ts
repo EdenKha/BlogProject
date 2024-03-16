@@ -1,8 +1,8 @@
-import {Utilisateur} from "./utilisateur.model";
+import {Message} from "./message.model";
 
 export interface Blog {
   id: number;
-  iduser: number;
   title: string;
   desc: string;
+  messages: Message[];
 }
