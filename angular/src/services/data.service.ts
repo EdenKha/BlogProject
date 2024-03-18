@@ -51,4 +51,21 @@ export class DataService {
     this.messagesSource.next(messages);
     console.log(messages)
   }
+
+  addBlogInUser(blog: Blog, userId: number): void {
+    // Obtenez la liste actuelle des utilisateurs
+    const users = this.usersSubject.getValue();
+
+    // Recherche de l'index de l'utilisateur dans le tableau d'utilisateurs
+    const userIndex = users.findIndex(user => user.id === userId);
+
+    // Si l'utilisateur est trouvé, ajouter le blog à son tableau de blogs
+    if (userIndex !== -1) {
+      users[userIndex].blogs.push(blog);
+
+      // Mettre à jour la liste des utilisateurs avec le nouvel état
+      this.usersSubject.next(users);
+    }
+  }
+
 }

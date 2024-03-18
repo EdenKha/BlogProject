@@ -1,25 +1,23 @@
-import { Component } from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {AjoutBlogComponent} from "../ajout-blog/ajout-blog.component";
-import {DialogService} from "../../services/dialog.service";
-import {NgForOf} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDialog } from "@angular/material/dialog";
+import { AjoutBlogComponent } from "../ajout-blog/ajout-blog.component";
+import { DialogService } from "../../services/dialog.service";
+import { Blog } from "../../models/blog.model";
+import { DataService } from "../../services/data.service";
 import {BlogComponent} from "../blog/blog.component";
-import {Blog} from "../../models/blog.model";
-import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-side-menu',
+  templateUrl: './side-menu.component.html',
   standalone: true,
   imports: [
-    NgForOf,
     BlogComponent,
-    AjoutBlogComponent
+    CommonModule
   ],
-  templateUrl: './side-menu.component.html',
-  styleUrl: './side-menu.component.css'
+  styleUrls: ['./side-menu.component.css']
 })
-
-export class SideMenuComponent {
+export class SideMenuComponent implements OnInit {
 
   blogs: Blog[] = [];
 
@@ -30,9 +28,19 @@ export class SideMenuComponent {
   ) {}
 
   ngOnInit() {
-    this.dataService.currentBlogs.subscribe(blogs => this.blogs = blogs);
+    // Subscribe to the currentUser observable
+    this.dataService.currentUser.subscribe(users => {
+      // Check if there are users
+      if (users && users.length > 0) {
+        // Get the last user in the list
+        const currentUser = users[users.length - 1];
+        // Filter blogs for the ID of the current user
+        this.dataService.currentBlogs.subscribe(blogs => {
+          this.blogs = blogs.filter(blog => blog.creator === currentUser.id);
+        });
+      }
+    });
   }
-
   openDialog(): void {
     if (!this.dialogService.isDialogCurrentlyOpen()) {
       const dialogRef = this.dialog.open(AjoutBlogComponent);

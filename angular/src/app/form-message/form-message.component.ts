@@ -36,28 +36,23 @@ export class FormMessageComponent {
       // Si aucun utilisateur n'est défini, utilisez "unknown" comme auteur du message
       this.post.author = "unknown";
     } else {
-      // Si un utilisateur est défini, utilisez son firstname comme auteur du message
-      this.post.author = this.currentUser.firstname;
-      // Générer un nouvel ID pour le message
-      this.post.id = this.dataService.getNextMessageId();
+      if (this.post.title || this.post.content) {
+        // Si un utilisateur est défini, utilisez son firstname comme auteur du message
+        this.post.author = this.currentUser.firstname;
+        // Générer un nouvel ID pour le message
+        this.post.id = this.dataService.getNextMessageId();
 
-      // Ajouter le message à la liste des messages
-      this.messages.unshift({ ...this.post });
+        // Ajouter le message à la liste des messages
+        this.messages.unshift({...this.post});
 
-      // Réinitialiser les champs du formulaire
-      this.post.title = '';
-      this.post.content = '';
+        // Réinitialiser les champs du formulaire
+        this.post.title = '';
+        this.post.content = '';
 
-      // Mettre à jour la liste des messages dans le service DataService
-      this.dataService.updateMessages(this.messages);
+        // Mettre à jour la liste des messages dans le service DataService
+        this.dataService.updateMessages(this.messages);
+      }
     }
-
-    // Assurez-vous que les champs title et content sont remplis
-    if (!this.post.title || !this.post.content) {
-      console.error("Erreur: Les champs title et content doivent être remplis.");
-      return;
-    }
-
   }
 
   loadCurrentUser() {

@@ -41,11 +41,27 @@ export class LoginComponent {
   }
 
   submitForm() {
-    this.user.id = this.dataService.getNextUserId();
-    this.users.push({...this.user});
-    this.dataService.updateUsers(this.users);
-    console.log('Données du formulaire : ', this.user);
-    this.closeLogin();
+    if (this.user.firstname!=''){
+      // Recherche de l'utilisateur avec le même nom et prénom
+      const existingUserIndex = this.users.findIndex(user =>
+        user.firstname === this.user.firstname && user.lastname === this.user.lastname
+      );
+
+      if (existingUserIndex !== -1) {
+        // Si l'utilisateur existe déjà, le déplacer à la fin de la liste
+        const existingUser = this.users.splice(existingUserIndex, 1)[0];
+        this.users.push(existingUser);
+      } else {
+        // Si l'utilisateur n'existe pas, l'ajouter à la fin de la liste
+        this.user.id = this.dataService.getNextUserId();
+        this.users.push({...this.user});
+      }
+
+      // Mettre à jour la liste des utilisateurs
+      this.dataService.updateUsers(this.users);
+      console.log('Données du formulaire : ', this.user);
+      this.closeLogin();
+    }
   }
 
   closeLogin(): void {
