@@ -13,14 +13,18 @@ export class BlogDescriptionComponent implements OnInit {
 
   constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.dataService.currentUser.subscribe(users => {
-      if (users && users.length>0){
-        if (users[0].blogs && users[0].blogs.length > 0){
-          this.blog = users[0].blogs[0]
+      if (users && users.length > 0) {
+        const currentUser = users[0]; // Sélection du premier utilisateur pour l'exemple, à adapter selon vos besoins
+        if (currentUser.blogs && currentUser.blogs.length > 0) {
+          this.blog = currentUser.blogs[0];
+        } else {
+          this.blog = {id: -1, title: '', desc: '', messages: []};
         }
+      } else {
+        this.blog = {id: -1, title: '', desc: '', messages: []};
       }
     });
   }
-
 }

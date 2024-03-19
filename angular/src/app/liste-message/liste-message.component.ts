@@ -20,27 +20,25 @@ import {DataService} from "../../services/data.service";
   styleUrl: './liste-message.component.css'
 })
 
-export class ListeMessageComponent implements OnInit{
-
+export class ListeMessageComponent implements OnInit {
   messages: Message[] = [];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.currentUser.subscribe(users => {
-      if (users && users.length>0){
-        if (users[0].blogs && users[0].blogs.length>0){
-          if (users[0].blogs[0].messages && users[0].blogs[0].messages.length>0){
-            this.messages = users[0].blogs[0].messages;
-          }
-        }
+      if (users && users.length > 0 && users[0].blogs && users[0].blogs.length > 0 && users[0].blogs[0].messages) {
+        // Mettre à jour la liste des messages
+        this.messages = users[0].blogs[0].messages;
+      } else {
+        this.messages = [];
       }
     });
   }
+}
 
   /*removeMessage(index: number) {
     this.messages.splice(index, 1);
     this.dataService.updateMessages(this.messages);
   }*/
 
-}

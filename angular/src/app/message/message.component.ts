@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { Message } from "../../models/message.model";
 import { User } from "../../models/user.model";
 import { DataService } from "../../services/data.service";
@@ -10,15 +10,15 @@ import { DataService } from "../../services/data.service";
   styleUrls: ['./message.component.css']
 })
 
-export class MessageComponent implements OnInit {
+export class MessageComponent implements AfterViewInit {
   @Input() message!: Message;
   @Input() index: any;
   currentUser!: User;
 
   constructor(private dataService: DataService) {}
 
-  ngOnInit() {
-    if (this.message) {
+  ngAfterViewInit() {
+    if (this.message && !this.message.date) {
       const currentDate = new Date();
       this.message.date = currentDate.toLocaleString();
     }
@@ -29,3 +29,4 @@ export class MessageComponent implements OnInit {
     });
   }
 }
+

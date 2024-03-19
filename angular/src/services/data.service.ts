@@ -30,4 +30,8 @@ export class DataService {
     const nextId = ++this.idUser;
     return nextId;
   }
+
+  updateUser(updatedUser: User[]): void {
+    this.usersSubject.next(updatedUser);
+  }
 }

@@ -4,6 +4,7 @@ import { NgForOf, NgIf } from '@angular/common';
 import {Message} from "../../models/message.model";
 import {DataService} from "../../services/data.service";
 import {User} from "../../models/user.model";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-form-message',
@@ -26,20 +27,24 @@ export class FormMessageComponent {
   constructor(private dataService: DataService) {}
 
   onSubmit() {
-      if (this.post.title && this.post.content) {
-        this.post.id = this.dataService.getNextMessageId();
-        this.dataService.currentUser.subscribe(users => {
-          if (users && users.length>0){
-            if (users[0].blogs && users[0].blogs.length>0){
-              this.post.author = users[0].firstname;
-              users[0].blogs[0].messages.unshift(this.post);
-              console.log(users[0].blogs[0].messages);
-            }
-          }
-        })
-      }else{
-        console.error("Erreur: Les champs title et content doivent être remplis.");
-      }
+    if (this.post.title && this.post.content) {
+      this.post.id = this.dataService.getNextMessageId();
+      this.dataService.currentUser.subscribe(users => {
+        if (users && users.length > 0 && users[0].blogs && users[0].blogs.length > 0) {
+          this.post.author = users[0].firstname;
+          users[0].blogs[0].messages.unshift(this.post);
+          console.log(users[0].blogs[0].messages);
+
+          // Réinitialiser les champs du formulaire après l'envoi du message
+          this.post.title = '';
+          this.post.content = '';
+        } else {
+          console.error("Erreur: Impossible d'ajouter le message - données d'utilisateur incorrectes.");
+        }
+      });
+    } else {
+      console.error("Erreur: Les champs title et content doivent être remplis.");
+    }
   }
 
 }

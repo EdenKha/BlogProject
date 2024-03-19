@@ -5,6 +5,8 @@ import {FormsModule} from "@angular/forms";
 import {Blog} from "../../models/blog.model";
 import {NgForOf, NgIf} from "@angular/common";
 import {DataService} from "../../services/data.service";
+import {User} from "../../models/user.model";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-ajout-blog',
@@ -15,6 +17,7 @@ import {DataService} from "../../services/data.service";
 })
 export class AjoutBlogComponent {
   blog: Blog = {id: 0, title: '', desc: '', messages: [] };
+  users!: User[];
 
   constructor(public dialogRef: MatDialogRef<AjoutBlogComponent>,
               private dialogService: DialogService,
@@ -28,10 +31,16 @@ export class AjoutBlogComponent {
   onSubmit(): void {
     if (this.blog.title && this.blog.desc) {
       this.blog.id = this.dataService.getNextBlogId();
-      this.dataService.currentUser.subscribe(users => {
-        users[0].blogs.unshift(this.blog);
-        console.log(users[0].blogs)
-      })
+      this.dataService.currentUser.pipe(take(1)).subscribe(users => {
+        if (users.length > 0){
+          users[0].blogs.unshift(this.blog);
+          console.log(users[0].blogs);
+        }
+      });
+      this.dataService.usersSubject.pipe(take(1)).subscribe(users => {
+        const updatedUsers = [users[0], ...users.slice(1)]; // Crée une copie mise à jour du tableau des utilisateurs
+        this.dataService.usersSubject.next(updatedUsers); // Émet la nouvelle valeur avec le blog ajouté
+      });
       this.closeAddBlog();
     }
   }
