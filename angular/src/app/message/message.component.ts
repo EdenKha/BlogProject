@@ -1,49 +1,31 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgForOf} from "@angular/common";
-import {Message} from "../../models/message.model"
-import {User} from "../../models/user.model";
-import {take} from "rxjs";
-import {DataService} from "../../services/data.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { Message } from "../../models/message.model";
+import { User } from "../../models/user.model";
+import { DataService } from "../../services/data.service";
 
 @Component({
   selector: 'app-message',
-  standalone: true,
-  imports: [
-    NgForOf
-  ],
   templateUrl: './message.component.html',
-  styleUrl: './message.component.css'
+  standalone: true,
+  styleUrls: ['./message.component.css']
 })
 
-
-
-export class MessageComponent implements OnInit{
+export class MessageComponent implements OnInit {
   @Input() message!: Message;
   @Input() index: any;
-  currentUser: User | undefined;
+  currentUser!: User;
 
-
-
-
-  constructor(private dataService: DataService) {
-    this.loadCurrentUser()
-  }
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
     if (this.message) {
       const currentDate = new Date();
       this.message.date = currentDate.toLocaleString();
     }
-  }
-
-  loadCurrentUser() {
-    this.dataService.currentUser.pipe(take(1)).subscribe(users => {
+    this.dataService.currentUser.subscribe(users => {
       if (users && users.length > 0) {
-        this.currentUser = users[users.length - 1];
+        this.currentUser = users[0];
       }
     });
   }
-
 }
-
-

@@ -22,45 +22,24 @@ export class FormMessageComponent {
     content: '',
     date: '',
   };
-  messages: Message[] = [];
-  currentUser!: User;
 
-  constructor(private dataService: DataService) {
-    this.loadCurrentUser()
-  }
+  constructor(private dataService: DataService) {}
 
   onSubmit() {
-    // Vérifiez si un utilisateur est défini
-    if (!this.currentUser) {
-      console.warn("Aucun utilisateur défini. Utilisation de 'unknown' comme auteur du message.");
-      // Si aucun utilisateur n'est défini, utilisez "unknown" comme auteur du message
-      this.post.author = "unknown";
-    } else {
-      if (this.post.title || this.post.content) {
-        // Si un utilisateur est défini, utilisez son firstname comme auteur du message
-        this.post.author = this.currentUser.firstname;
-        // Générer un nouvel ID pour le message
+      if (this.post.title && this.post.content) {
         this.post.id = this.dataService.getNextMessageId();
-
-        // Ajouter le message à la liste des messages
-        this.messages.unshift({...this.post});
-
-        // Réinitialiser les champs du formulaire
-        this.post.title = '';
-        this.post.content = '';
-
-        // Mettre à jour la liste des messages dans le service DataService
-        this.dataService.updateMessages(this.messages);
+        this.dataService.currentUser.subscribe(users => {
+          if (users && users.length>0){
+            if (users[0].blogs && users[0].blogs.length>0){
+              this.post.author = users[0].firstname;
+              users[0].blogs[0].messages.unshift(this.post);
+              console.log(users[0].blogs[0].messages);
+            }
+          }
+        })
+      }else{
+        console.error("Erreur: Les champs title et content doivent être remplis.");
       }
-    }
   }
 
-  loadCurrentUser() {
-    // Récupérer le dernier utilisateur du flux currentUser
-    this.dataService.currentUser.subscribe(users => {
-      if (users && users.length > 0) {
-        this.currentUser = users[users.length - 1];
-      }
-    });
-  }
 }
