@@ -17,8 +17,7 @@ import {DialogService} from "../../services/dialog.service";
 
 export class HeaderComponent {
 
-  users: User[] = [];
-  user: User | null = null;
+  user!: User;
 
   constructor(public dialog: MatDialog,
               private loginService: DialogService,
@@ -27,17 +26,8 @@ export class HeaderComponent {
 
   ngOnInit(): void {
     this.dataService.currentUser.subscribe(users => {
-      this.users = users;
-      this.updateCurrentUser();
+      this.user = users[0];
     });
-  }
-
-  updateCurrentUser(): void {
-    if (this.users.length > 0) {
-      this.user = this.users[this.users.length - 1];
-    } else {
-      this.user = null;
-    }
   }
 
   public openLogin(): void {

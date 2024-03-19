@@ -9,23 +9,18 @@ import {DataService} from "../../services/data.service";
   styleUrls: ['./blog-description.component.css']
 })
 export class BlogDescriptionComponent implements OnInit {
-  blogs: Blog[] = [];
-  blog: Blog | null = null;
+  blog!: Blog;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.dataService.currentBlogs.subscribe(blogs => {
-      this.blogs = blogs;
-      this.updateCurrentBlog();
+    this.dataService.currentUser.subscribe(users => {
+      if (users && users.length>0){
+        if (users[0].blogs && users[0].blogs.length > 0){
+          this.blog = users[0].blogs[0]
+        }
+      }
     });
   }
 
-  updateCurrentBlog(): void {
-    if (this.blogs.length > 0) {
-      this.blog = this.blogs[this.blogs.length - 1];
-    } else {
-      this.blog = null;
-    }
-  }
 }

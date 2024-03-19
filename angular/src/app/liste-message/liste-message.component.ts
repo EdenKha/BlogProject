@@ -1,8 +1,8 @@
 import {Component,OnInit} from '@angular/core';
+import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {MessageComponent} from "../message/message.component";
 import {FormMessageComponent} from "../form-message/form-message.component";
-import {NgForOf} from "@angular/common";
 import {Message} from "../../models/message.model";
 import {DataService} from "../../services/data.service";
 
@@ -14,25 +14,33 @@ import {DataService} from "../../services/data.service";
     RouterLink,
     MessageComponent,
     FormMessageComponent,
-    NgForOf
+    CommonModule
   ],
   templateUrl: './liste-message.component.html',
   styleUrl: './liste-message.component.css'
 })
 
-export class ListeMessageComponent {
+export class ListeMessageComponent implements OnInit{
 
   messages: Message[] = [];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.currentMessages.subscribe(messages => this.messages = messages);
+    this.dataService.currentUser.subscribe(users => {
+      if (users && users.length>0){
+        if (users[0].blogs && users[0].blogs.length>0){
+          if (users[0].blogs[0].messages && users[0].blogs[0].messages.length>0){
+            this.messages = users[0].blogs[0].messages;
+          }
+        }
+      }
+    });
   }
 
-  removeMessage(index: number) {
+  /*removeMessage(index: number) {
     this.messages.splice(index, 1);
     this.dataService.updateMessages(this.messages);
-  }
+  }*/
 
 }

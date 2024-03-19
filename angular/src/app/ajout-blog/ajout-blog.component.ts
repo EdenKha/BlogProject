@@ -3,7 +3,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { DialogService } from '../../services/dialog.service';
 import {FormsModule} from "@angular/forms";
 import {Blog} from "../../models/blog.model";
-import {HttpClient} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
 import {DataService} from "../../services/data.service";
 
@@ -16,25 +15,23 @@ import {DataService} from "../../services/data.service";
 })
 export class AjoutBlogComponent {
   blog: Blog = {id: 0, title: '', desc: '', messages: [] };
-  blogs: Blog[] = [];
 
   constructor(public dialogRef: MatDialogRef<AjoutBlogComponent>,
               private dialogService: DialogService,
               private dataService: DataService,
-              private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.dialogService.setDialogOpenState(true);
-    this.dataService.currentBlogs.subscribe(blogs => this.blogs = blogs);
   }
 
   onSubmit(): void {
     if (this.blog.title && this.blog.desc) {
       this.blog.id = this.dataService.getNextBlogId();
-      this.blogs.push({...this.blog});
-      this.dataService.updateBlogs(this.blogs);
-      console.log('Données du formulaire : ', this.blog);
+      this.dataService.currentUser.subscribe(users => {
+        users[0].blogs.unshift(this.blog);
+        console.log(users[0].blogs)
+      })
       this.closeAddBlog();
     }
   }

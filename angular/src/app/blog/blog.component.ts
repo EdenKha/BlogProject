@@ -13,16 +13,10 @@ export class BlogComponent {
 
   @Input() blog!: Blog;
   @Input() index!: number;
-  userId!: string | null;
-  blogId!: string | null;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.userId = params.get('userId');
-      this.blogId = params.get('blogId');
-    });
+  onSubmit(){
   }
 
 }

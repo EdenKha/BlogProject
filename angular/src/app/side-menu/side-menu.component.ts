@@ -30,7 +30,13 @@ export class SideMenuComponent {
   ) {}
 
   ngOnInit() {
-    this.dataService.currentBlogs.subscribe(blogs => this.blogs = blogs);
+    this.dataService.currentUser.subscribe(users => {
+      if(users && users.length>0){
+        if (users[0].blogs && users[0].blogs.length>0){
+          this.blogs = users[0].blogs;
+        }
+      }
+    });
   }
 
   openDialog(): void {
