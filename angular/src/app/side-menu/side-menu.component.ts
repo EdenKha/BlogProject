@@ -6,6 +6,7 @@ import {NgForOf} from "@angular/common";
 import {BlogComponent} from "../blog/blog.component";
 import {Blog} from "../../models/blog.model";
 import {DataService} from "../../services/data.service";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-side-menu',
@@ -22,6 +23,7 @@ import {DataService} from "../../services/data.service";
 export class SideMenuComponent {
 
   blogs: Blog[] = [];
+  currentUser!: User;
 
   constructor(
     public dialog: MatDialog,
@@ -30,16 +32,10 @@ export class SideMenuComponent {
   ) {}
 
   ngOnInit() {
-    this.dataService.currentUser.subscribe(users => {
-      if (users && users.length > 0) {
-        const currentUser = users[0]; // Sélection du premier utilisateur pour l'exemple, à adapter selon vos besoins
-        if (currentUser.blogs && currentUser.blogs.length > 0) {
-          this.blogs = currentUser.blogs;
-        } else {
-          this.blogs = [];
-        }
-      } else {
-        this.blogs = [];
+    this.dataService.allBlogsO.subscribe(blogs => {
+      this.currentUser = this.dataService.getCurrentUser();
+      if (blogs && blogs.length > 0) {
+        this.blogs = blogs.filter(blog => blog.idUser == this.currentUser.id);
       }
     });
   }

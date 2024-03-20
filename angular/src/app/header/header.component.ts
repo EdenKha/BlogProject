@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginComponent} from "../login/login.component";
 import {User} from "../../models/user.model";
 import {MatDialog} from "@angular/material/dialog";
@@ -15,7 +15,7 @@ import {DialogService} from "../../services/dialog.service";
   styleUrl: './header.component.css'
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   user!: User;
 
@@ -25,9 +25,9 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.dataService.currentUser.subscribe(users => {
-      this.user = users[0];
-    });
+    this.dataService.allUsersO.subscribe(users => {
+      this.user = users[0]
+    })
   }
 
   public openLogin(): void {

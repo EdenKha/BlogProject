@@ -26,19 +26,13 @@ export class ListeMessageComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.currentUser.subscribe(users => {
-      if (users && users.length > 0 && users[0].blogs && users[0].blogs.length > 0 && users[0].blogs[0].messages) {
-        // Mettre à jour la liste des messages
-        this.messages = users[0].blogs[0].messages;
-      } else {
-        this.messages = [];
-      }
-    });
+    this.messages = this.dataService.getMessageList();
   }
+  removeMessage(index: number) {
+    this.dataService.removeMessage(index);
+  }
+
 }
 
-  /*removeMessage(index: number) {
-    this.messages.splice(index, 1);
-    this.dataService.updateMessages(this.messages);
-  }*/
+
 

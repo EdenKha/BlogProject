@@ -1,19 +1,82 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 import { User } from "../models/user.model";
+import {Blog} from "../models/blog.model";
+import {Message} from "../models/message.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  public usersSubject = new BehaviorSubject<User[]>([]);
-  currentUser = this.usersSubject.asObservable();
+  private allUsers = new BehaviorSubject<User[]>([]);
+  allUsersO = this.allUsers.asObservable();
+
+  private allBlogs = new BehaviorSubject<Blog[]>([]);
+  allBlogsO = this.allBlogs.asObservable();
+
+  private allMessages = new BehaviorSubject<Message[]>([]);
+  allMessagesO = this.allMessages.asObservable();
 
   private idUser: number = 0;
   private idBlog: number = 0;
   private idMessage: number = 0;
 
-  constructor() {
+  constructor() {}
+
+  getUserList(){
+    return this.allUsers.getValue();
+  }
+
+  getBlogList(){
+    return this.allBlogs.getValue();
+  }
+
+  getMessageList(){
+    return this.allMessages.getValue();
+  }
+
+
+  //retourne le blog actuel
+  getCurrentBlog(){
+    return this.getUserBlogs()[0];
+  }
+
+  getCurrentUser(){
+    return this.getUserList()[0];
+  }
+
+  //retourne la liste de blogs de l'utilisateur actuel
+  getUserBlogs(){
+    let currentUser = this.getCurrentUser();
+    return this.allBlogs.getValue().filter(blog =>
+      blog.idUser == currentUser.id
+    )
+  }
+
+  //retourne la liste des messages du blog acteul
+  getUserBlogMessages(){
+    let currentBlog = this.getCurrentBlog();
+    return this.allMessages.getValue().filter(message =>
+      message.idBlog == currentBlog.id
+    )
+  }
+
+  //Change le blog actuel
+  switchActualBlog(index: number) {
+    // Obtenir le blog sélectionné
+    const blog = this.allBlogs.getValue()[index];
+    // Obtenir la liste actuelle des blogs
+    const blogs = this.getBlogList();
+    // Déplacer le blog sélectionné au début de la liste
+    blogs.splice(index, 1); // Supprime le blog sélectionné de sa position actuelle
+    blogs.unshift(blog); // Ajoute le blog sélectionné au début de la liste
+    // Émettre la nouvelle valeur de la liste des blogs
+    this.allBlogs.next(blogs);
+  }
+
+  //supprime un message de la liste
+  removeMessage(id: number){
+
   }
 
   getNextMessageId(): number {
@@ -31,7 +94,27 @@ export class DataService {
     return nextId;
   }
 
-  updateUser(updatedUser: User[]): void {
-    this.usersSubject.next(updatedUser);
+  addUser(user: User){
+    this.getUserList().unshift(user);
+    this.allUsers.next(this.getUserList());
   }
+
+  addBlog(blog: Blog){
+    this.getBlogList().unshift(blog);
+    this.allBlogs.next(this.getBlogList());
+  }
+
+  addMessage(messages: Message[]) {
+    const messageList = this.getMessageList();
+    if (messageList !== undefined) {
+      if (messages.length > 0) {
+        messageList.unshift(messages[0]);
+      }
+      this.allMessages.next(messageList);
+    } else {
+      console.error("La liste des messages est indéfinie.");
+    }
+  }
+
+
 }

@@ -16,8 +16,7 @@ import {take} from "rxjs";
   styleUrls: ['./ajout-blog.component.css']
 })
 export class AjoutBlogComponent {
-  blog: Blog = {id: 0, title: '', desc: '', messages: [] };
-  users!: User[];
+  blog: Blog = {id: 0, title: '', desc: '',idUser: -1 };
 
   constructor(public dialogRef: MatDialogRef<AjoutBlogComponent>,
               private dialogService: DialogService,
@@ -29,20 +28,11 @@ export class AjoutBlogComponent {
   }
 
   onSubmit(): void {
-    if (this.blog.title && this.blog.desc) {
-      this.blog.id = this.dataService.getNextBlogId();
-      this.dataService.currentUser.pipe(take(1)).subscribe(users => {
-        if (users.length > 0){
-          users[0].blogs.unshift(this.blog);
-          console.log(users[0].blogs);
-        }
-      });
-      this.dataService.usersSubject.pipe(take(1)).subscribe(users => {
-        const updatedUsers = [users[0], ...users.slice(1)]; // Crée une copie mise à jour du tableau des utilisateurs
-        this.dataService.usersSubject.next(updatedUsers); // Émet la nouvelle valeur avec le blog ajouté
-      });
-      this.closeAddBlog();
-    }
+    this.blog.id = this.dataService.getNextBlogId();
+    this.blog.idUser = this.dataService.getCurrentUser().id;
+    this.dataService.addBlog(this.blog);
+    console.log(this.dataService.getBlogList())
+    this.closeAddBlog();
   }
 
   closeAddBlog(): void {

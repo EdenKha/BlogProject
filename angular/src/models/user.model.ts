@@ -6,5 +6,4 @@ export interface User {
   firstname: string;
   mail: string;
   phone: string;
-  blogs: Blog[];
 }

@@ -22,8 +22,7 @@ export class LoginComponent {
     firstname: '',
     lastname: '',
     mail: '',
-    phone: '',
-    blogs: [],
+    phone: ''
   };
 
   constructor(public loginRef: MatDialogRef<LoginComponent>,
@@ -34,14 +33,11 @@ export class LoginComponent {
   submitForm() {
     if (this.user.firstname) {
       this.user.id = this.dataService.getNextUserId();
-      this.dataService.currentUser.pipe(take(1)).subscribe(users => {
-        const updatedUsers = [this.user, ...users]; // Ajouter le nouvel utilisateur en tête de liste
-        this.dataService.usersSubject.next(updatedUsers); // Émettre la nouvelle liste des utilisateurs
-        console.log(updatedUsers);
-      });
+      this.dataService.addUser(this.user);
       this.closeLogin();
+      console.log(this.dataService.getUserList());
     } else {
-      console.error("Erreur: Veuillez remplir tous les champs.");
+      console.error("Erreur: Veuillez remplir le prénom.");
     }
   }
 
