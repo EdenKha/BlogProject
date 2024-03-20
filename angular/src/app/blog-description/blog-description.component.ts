@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Blog } from "../../models/blog.model";
 import {DataService} from "../../services/data.service";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-blog-description',
@@ -14,17 +15,17 @@ import {DataService} from "../../services/data.service";
 })
 export class BlogDescriptionComponent implements OnInit {
   blog!: Blog;
+  currentUser!: User;
 
   constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {
-    this.dataService.currentUser.subscribe(users => {
-      if (users && users.length>0){
-        if (users[0].blogs && users[0].blogs.length > 0){
-          this.blog = users[0].blogs[0]
+  ngOnInit() {
+    this.dataService.allBlogsO.subscribe(blogs => {
+      this.currentUser = this.dataService.getCurrentUser();
+      if (this.dataService.getUserList().length>0)
+        if (blogs && blogs.length > 0) {
+          this.blog = blogs.filter(blog => blog.idUser == this.currentUser.id)[0]
         }
-      }
     });
   }
-
 }

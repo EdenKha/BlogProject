@@ -5,6 +5,8 @@ import {FormsModule} from "@angular/forms";
 import {Blog} from "../../models/blog.model";
 import {NgForOf, NgIf} from "@angular/common";
 import {DataService} from "../../services/data.service";
+import {User} from "../../models/user.model";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-ajout-blog',
@@ -14,7 +16,7 @@ import {DataService} from "../../services/data.service";
   styleUrls: ['./ajout-blog.component.css']
 })
 export class AjoutBlogComponent {
-  blog: Blog = {id: 0, title: '', desc: '', messages: [] };
+  blog: Blog = {id: 0, title: '', desc: '',idUser: -1 };
 
   constructor(public dialogRef: MatDialogRef<AjoutBlogComponent>,
               private dialogService: DialogService,
@@ -26,14 +28,11 @@ export class AjoutBlogComponent {
   }
 
   onSubmit(): void {
-    if (this.blog.title && this.blog.desc) {
-      this.blog.id = this.dataService.getNextBlogId();
-      this.dataService.currentUser.subscribe(users => {
-        users[0].blogs.unshift(this.blog);
-        console.log(users[0].blogs)
-      })
-      this.closeAddBlog();
-    }
+    this.blog.id = this.dataService.getNextBlogId();
+    this.blog.idUser = this.dataService.getCurrentUser().id;
+    this.dataService.addBlog(this.blog);
+    console.log(this.dataService.getBlogList())
+    this.closeAddBlog();
   }
 
   closeAddBlog(): void {

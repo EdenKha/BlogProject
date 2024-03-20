@@ -4,5 +4,5 @@ export interface Blog {
   id: number;
   title: string;
   desc: string;
-  messages: Message[];
+  idUser: number;
 }

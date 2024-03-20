@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { Message } from "../../models/message.model";
 import { User } from "../../models/user.model";
 import { DataService } from "../../services/data.service";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-message',
@@ -18,14 +19,7 @@ export class MessageComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    if (this.message) {
-      const currentDate = new Date();
-      this.message.date = currentDate.toLocaleString();
-    }
-    this.dataService.currentUser.subscribe(users => {
-      if (users && users.length > 0) {
-        this.currentUser = users[0];
-      }
-    });
+    this.currentUser = this.dataService.getCurrentUser();
   }
 }
+

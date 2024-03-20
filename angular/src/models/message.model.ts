@@ -4,4 +4,6 @@ export interface Message {
   title: string;
   content: string;
   date: string;
+  idBlog: number;
+  idUser: number;
 }

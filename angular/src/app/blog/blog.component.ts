@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Blog} from "../../models/blog.model";
 import {ActivatedRoute} from "@angular/router";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-blog',
@@ -14,9 +15,10 @@ export class BlogComponent {
   @Input() blog!: Blog;
   @Input() index!: number;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   onSubmit(){
+    this.dataService.switchActualBlog(this.index);
   }
 
 }
