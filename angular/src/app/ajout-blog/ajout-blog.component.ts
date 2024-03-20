@@ -29,9 +29,12 @@ export class AjoutBlogComponent {
 
   onSubmit(): void {
     this.blog.id = this.dataService.getNextBlogId();
+    this.dataService.setCurrentIdBlog(this.blog.id);
     this.blog.idUser = this.dataService.getCurrentUser().id;
     this.dataService.addBlog(this.blog);
+    this.dataService.updateMessageList();
     console.log(this.dataService.getBlogList())
+    console.log(this.dataService.currentIdBlog)
     this.closeAddBlog();
   }
 

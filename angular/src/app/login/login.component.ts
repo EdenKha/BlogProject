@@ -33,7 +33,11 @@ export class LoginComponent {
   submitForm() {
     if (this.user.firstname) {
       this.user.id = this.dataService.getNextUserId();
+      this.dataService.setCurrentIdUser(this.user.id);
+      this.dataService.setCurrentIdBlog(-1);
       this.dataService.addUser(this.user);
+      this.dataService.updateBlogList();
+      this.dataService.updateMessageList();
       this.closeLogin();
       console.log(this.dataService.getUserList());
     } else {

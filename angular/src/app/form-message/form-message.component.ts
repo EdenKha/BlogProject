@@ -26,23 +26,20 @@ export class FormMessageComponent {
   };
   posts: Message[] = [];
   currentUser!: User;
-  currentBlog!: Blog;
 
   constructor(private dataService: DataService) {}
 
   onSubmit(): void {
     if (this.post.title && this.post.content) {
-      this.currentUser = this.dataService.getCurrentUser();
-      this.currentBlog = this.dataService.getCurrentBlog();
       this.post.id = this.dataService.getNextMessageId();
+      this.currentUser = this.dataService.getCurrentUser();
       this.post.author = this.currentUser.firstname;
-      this.post.idBlog = this.currentBlog.id;
-      this.post.idUser = this.currentUser.id;
+      this.post.idBlog = this.dataService.currentIdBlog;
+      this.post.idUser = this.dataService.currentIdUser;
       this.posts.unshift({ ...this.post });
       this.post.title = '';
       this.post.content = '';
       this.dataService.addMessage(this.posts);
-      console.log(this.dataService.getMessageList());
     } else {
       console.error("Erreur: Les champs title et content doivent être remplis.");
     }

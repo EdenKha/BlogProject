@@ -23,7 +23,6 @@ import {User} from "../../models/user.model";
 export class SideMenuComponent {
 
   blogs: Blog[] = [];
-  currentUser!: User;
 
   constructor(
     public dialog: MatDialog,
@@ -33,9 +32,8 @@ export class SideMenuComponent {
 
   ngOnInit() {
     this.dataService.allBlogsO.subscribe(blogs => {
-      this.currentUser = this.dataService.getCurrentUser();
       if (blogs && blogs.length > 0) {
-        this.blogs = blogs.filter(blog => blog.idUser == this.currentUser.id);
+        this.blogs = blogs.filter(blog => blog.idUser == this.dataService.currentIdUser);
       }
     });
   }

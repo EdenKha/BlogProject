@@ -13,3 +13,10 @@ button{
 button:hover {
   text-decoration: underline;
 }
+
+.selected {
+  /* Ajoutez les styles spécifiques pour l'élément sélectionné ici */
+  background-color: #000; /* Par exemple, changer la couleur de fond en gris plus foncé */
+  color: #fff; /* Changer la couleur du texte en blanc */
+  font-weight: bold; /* Mettre le texte en gras */
+}

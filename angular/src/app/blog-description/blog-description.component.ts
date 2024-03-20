@@ -15,17 +15,12 @@ import {User} from "../../models/user.model";
 })
 export class BlogDescriptionComponent implements OnInit {
   blog!: Blog;
-  currentUser!: User;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
     this.dataService.allBlogsO.subscribe(blogs => {
-      this.currentUser = this.dataService.getCurrentUser();
-      if (this.dataService.getUserList().length>0)
-        if (blogs && blogs.length > 0) {
-          this.blog = blogs.filter(blog => blog.idUser == this.currentUser.id)[0]
-        }
+      this.blog = blogs.filter(blog => blog.idUser == this.dataService.currentIdUser)[0]
     });
   }
 }

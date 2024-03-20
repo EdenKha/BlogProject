@@ -20,6 +20,12 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.dataService.getCurrentUser();
+    const currentDate = new Date();
+    this.message.date = currentDate.toLocaleString();
+  }
+
+  removeMessage() {
+    this.dataService.removeMessage(this.message.id);
   }
 }
 

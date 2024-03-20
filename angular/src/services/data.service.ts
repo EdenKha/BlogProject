@@ -21,6 +21,9 @@ export class DataService {
   private idBlog: number = 0;
   private idMessage: number = 0;
 
+  currentIdUser: number = 0;
+  currentIdBlog: number = 0;
+
   constructor() {}
 
   getUserList(){
@@ -33,6 +36,14 @@ export class DataService {
 
   getMessageList(){
     return this.allMessages.getValue();
+  }
+
+  setCurrentIdUser(id: number){
+    this.currentIdUser = id;
+  }
+
+  setCurrentIdBlog(id: number){
+    this.currentIdBlog = id;
   }
 
 
@@ -75,8 +86,11 @@ export class DataService {
   }
 
   //supprime un message de la liste
-  removeMessage(id: number){
-
+  removeMessage(id: number) {
+    this.allMessages.next(this.allMessages.getValue());
+    const messages = this.allMessages.getValue();
+    const updatedMessages = messages.filter(message => message.id !== id);
+    this.allMessages.next(updatedMessages);
   }
 
   getNextMessageId(): number {
@@ -114,6 +128,18 @@ export class DataService {
     } else {
       console.error("La liste des messages est indéfinie.");
     }
+  }
+
+  updateBlogList(){
+    this.allBlogs.next(this.allBlogs.getValue())
+  }
+
+  updateUserList(){
+    this.allUsers.next(this.allUsers.getValue())
+  }
+
+  updateMessageList(){
+    this.allMessages.next(this.allMessages.getValue())
   }
 
 

@@ -12,6 +12,7 @@
 }
 
 .police-date {
+  background-color: transparent;
   font-size: 9px;
   color : #BEB9CB;
 }
@@ -35,10 +36,10 @@
   font-size: 15px;
 }
 
-h1, h2, p {
-  margin: 0;
+h1{
+  margin-bottom: 5px;
 }
 
-h3 {
-
+h3, p {
+  background-color: #1F1F2E;
 }

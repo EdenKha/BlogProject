@@ -15,7 +15,7 @@ import {DialogService} from "../../services/dialog.service";
   styleUrl: './header.component.css'
 })
 
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
   user!: User;
 
@@ -38,5 +38,4 @@ export class HeaderComponent implements OnInit{
       });
     }
   }
-
 }

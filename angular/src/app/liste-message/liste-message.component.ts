@@ -1,10 +1,11 @@
-import {Component,OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {MessageComponent} from "../message/message.component";
 import {FormMessageComponent} from "../form-message/form-message.component";
 import {Message} from "../../models/message.model";
 import {DataService} from "../../services/data.service";
+import {Blog} from "../../models/blog.model";
 
 
 @Component({
@@ -23,14 +24,18 @@ import {DataService} from "../../services/data.service";
 export class ListeMessageComponent implements OnInit {
   messages: Message[] = [];
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.messages = this.dataService.getMessageList();
+    this.dataService.allMessagesO.pipe().subscribe(messages => {
+      if (messages && messages.length > 0) {
+        this.messages = messages.filter(message => message.idBlog === this.dataService.currentIdBlog);
+        console.log(this.messages);
+      }
+    });
   }
-  removeMessage(index: number) {
-    this.dataService.removeMessage(index);
-  }
+
 
 }
 
