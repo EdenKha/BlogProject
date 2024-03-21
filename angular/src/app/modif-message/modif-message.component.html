@@ -1,0 +1,15 @@
+<div class="modifmess">
+  <form (ngSubmit)="submitMod()">
+    <div class="a">
+      <label for="title">Titre</label>
+      <input type="text" id="title" name="title" [(ngModel)]="message.title" required>
+    </div>
+    <div class="a">
+      <label for="message">Contenu</label>
+      <textarea type="text" id="message" name="message" [(ngModel)]="message.content" required></textarea>
+    </div>
+    <div class="button-container">
+      <button type="submit">Enregistrer</button>
+    </div>
+  </form>
+</div>

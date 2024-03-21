@@ -29,8 +29,8 @@ export class FormMessageComponent {
 
   constructor(private dataService: DataService) {}
 
-  async onSubmit(): Promise<void> {
-    if (this.post.title && this.post.content) {
+  onSubmit() {
+    if (this.post.title && this.post.content && this.dataService.currentIdUser>0 ) {
       this.post.id = this.dataService.getNextMessageId();
       this.currentUser = this.dataService.getCurrentUser();
       this.post.author = this.currentUser.firstname;

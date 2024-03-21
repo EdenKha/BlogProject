@@ -30,14 +30,16 @@ export class AjoutBlogComponent {
   }
 
   onSubmit(): void {
-    this.blog.id = this.dataService.getNextBlogId();
-    this.dataService.setCurrentIdBlog(this.blog.id);
-    this.blog.idUser = this.dataService.getCurrentUser().id;
-    this.dataService.addBlog(this.blog);
-    this.dataService.updateMessageList();
-    console.log(this.dataService.getBlogList())
-    console.log(this.dataService.currentIdBlog)
-    this.closeAddBlog();
+    if (this.blog.title && this.dataService.currentIdUser>0){
+      this.blog.id = this.dataService.getNextBlogId();
+      this.dataService.setCurrentIdBlog(this.blog.id);
+      this.blog.idUser = this.dataService.getCurrentUser().id;
+      this.dataService.addBlog(this.blog);
+      this.dataService.updateMessageList();
+      console.log(this.dataService.getBlogList())
+      console.log(this.dataService.currentIdBlog)
+      this.closeAddBlog();
+    }
   }
 
   closeAddBlog(): void {

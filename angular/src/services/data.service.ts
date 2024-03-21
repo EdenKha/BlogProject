@@ -23,6 +23,7 @@ export class DataService {
 
   currentIdUser: number = 0;
   currentIdBlog: number = 0;
+  currentIdMessage = 0;
 
   constructor() {}
 
@@ -44,6 +45,10 @@ export class DataService {
 
   setCurrentIdBlog(id: number){
     this.currentIdBlog = id;
+  }
+
+  setCurrentIdMessage(id: number) {
+    this.currentIdMessage = id;
   }
 
 
@@ -140,5 +145,19 @@ export class DataService {
       blog = {id: -1, title: '', desc: '', idUser: -1}
     }
     return blog;
+  }
+
+
+  getCurrentMessage() {
+    let message =  this.allMessages.getValue().find(message => message.id == this.currentIdMessage);
+    if (message == undefined){
+      message = {id: -1, title: '', content: '', idUser: -1, date:'', idBlog: -1, author: ''}
+    }
+    return message;
+  }
+
+  insert(id: number, user: User) {
+    this.allUsers.getValue().splice(id, 1);
+    this.allUsers.getValue().unshift(user);
   }
 }

@@ -1,0 +1,66 @@
+.modifmess {
+  background-color: #1F1F2E;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border: 3px solid #000;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  width: calc(33.333%);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  background-color: #1F1F2E;
+}
+
+form{
+  background-color: #1F1F2E;
+}
+
+label {
+  font-weight: bold;
+  background-color: #1F1F2E;
+}
+
+.a{
+  background-color: #1F1F2E;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  width: 100%;
+  background-color: #1F1F2E;
+  display: flex;
+  justify-content: center; /* Pour centrer le bouton horizontalement */
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+textarea{
+  min-height: 200px;
+}
+
+button {
+  width: 40%;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #111;
+}

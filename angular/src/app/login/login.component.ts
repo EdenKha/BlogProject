@@ -32,10 +32,21 @@ export class LoginComponent {
 
   submitForm() {
     if (this.user.firstname) {
-      this.user.id = this.dataService.getNextUserId();
-      this.dataService.setCurrentIdUser(this.user.id);
-      this.dataService.setCurrentIdBlog(-1);
-      this.dataService.addUser(this.user);
+      if (this.dataService.getUserList().find(user => this.user.firstname==user.firstname)){
+        const id = this.dataService.getUserList().findIndex(user => this.user.firstname==user.firstname);
+        console.log(id)
+        if (id != -1){
+          this.user.id = id;
+          this.dataService.setCurrentIdUser(id);
+          this.dataService.setCurrentIdBlog(-1);
+        }
+
+      } else {
+        this.user.id = this.dataService.getNextUserId();
+        this.dataService.setCurrentIdUser(this.user.id);
+        this.dataService.setCurrentIdBlog(-1);
+        this.dataService.addUser(this.user);
+      }
       this.dataService.updateUserList()
       this.dataService.updateBlogList();
       this.dataService.updateMessageList();
