@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {ChangeDetectorRef, Injectable} from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 import { User } from "../models/user.model";
 import {Blog} from "../models/blog.model";
@@ -87,7 +87,6 @@ export class DataService {
 
   //supprime un message de la liste
   removeMessage(id: number) {
-    this.allMessages.next(this.allMessages.getValue());
     const messages = this.allMessages.getValue();
     const updatedMessages = messages.filter(message => message.id !== id);
     this.allMessages.next(updatedMessages);

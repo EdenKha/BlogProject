@@ -8,12 +8,19 @@
   border: 3px solid #000;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  width: calc(33.333%);
 }
 
 .create{
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
+  background-color: #1F1F2E;
+}
+
+.add{
+  display: flex;
+  flex-direction: column;
   background-color: #1F1F2E;
 }
 
@@ -25,6 +32,11 @@
   margin-top: 10px;
   margin-bottom: 10px;
   min-height: 100px;
+}
+
+.nomblog{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 button{

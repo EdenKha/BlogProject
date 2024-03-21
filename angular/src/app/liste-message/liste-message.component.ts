@@ -29,10 +29,8 @@ export class ListeMessageComponent implements OnInit {
   ngOnInit() {
     this.messages = this.dataService.getMessageList();
     this.dataService.allMessagesO.pipe().subscribe(messages => {
-      if (messages && messages.length > 0) {
-        this.messages = messages.filter(message => message.idBlog === this.dataService.currentIdBlog);
-        console.log(this.messages);
-      }
+      this.messages = messages.filter(message => message.idBlog === this.dataService.currentIdBlog);
+      console.log(this.messages);
     });
   }
 

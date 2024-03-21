@@ -17,6 +17,7 @@ import {take} from "rxjs";
 })
 export class AjoutBlogComponent {
   blog: Blog = {id: 0, title: '', desc: '',idUser: -1 };
+  user!: User;
 
   constructor(public dialogRef: MatDialogRef<AjoutBlogComponent>,
               private dialogService: DialogService,

@@ -6,7 +6,10 @@
     <textarea class="desc" placeholder="Entrez une description" [(ngModel)]="blog.desc"></textarea>
     <button class="cre" (click)="onSubmit()">Créer</button>
   </div>
-  <h3>Rejoindre un blog</h3>
-  <input placeholder="Entrez un nom d'utilisateur">
-  <button>Ajouter</button>
+  <div class="add">
+    <h3>Rejoindre un blog</h3>
+    <input placeholder="Entrez un nom d'utilisateur" [(ngModel)]="user.id">
+    <input class="nomblog" placeholder="Entrez un nom de blog"  [(ngModel)]="blog.title">
+    <button>Ajouter</button>
+  </div>
 </div>
