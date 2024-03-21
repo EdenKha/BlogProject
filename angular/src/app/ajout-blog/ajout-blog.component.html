@@ -8,8 +8,8 @@
   </div>
   <div class="add">
     <h3>Rejoindre un blog</h3>
-    <input placeholder="Entrez un nom d'utilisateur" [(ngModel)]="user.id">
-    <input class="nomblog" placeholder="Entrez un nom de blog"  [(ngModel)]="blog.title">
-    <button>Ajouter</button>
+    <input placeholder="Entrez un nom d'utilisateur" [(ngModel)]="user.firstname">
+    <input class="nomblog" placeholder="Entrez un nom de blog"  [(ngModel)]="blogA.title">
+    <button (click)="addBlog()">Ajouter</button>
   </div>
 </div>

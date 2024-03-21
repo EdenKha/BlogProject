@@ -29,11 +29,13 @@ export class FormMessageComponent {
 
   constructor(private dataService: DataService) {}
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.post.title && this.post.content) {
       this.post.id = this.dataService.getNextMessageId();
       this.currentUser = this.dataService.getCurrentUser();
       this.post.author = this.currentUser.firstname;
+      const currentDate = new Date();
+      this.post.date = currentDate.toLocaleString();
       this.post.idBlog = this.dataService.currentIdBlog;
       this.post.idUser = this.dataService.currentIdUser;
       this.posts.unshift({ ...this.post });

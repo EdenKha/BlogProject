@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Injectable} from '@angular/core';
-import { BehaviorSubject } from "rxjs";
+import {BehaviorSubject, distinct} from "rxjs";
 import { User } from "../models/user.model";
 import {Blog} from "../models/blog.model";
 import {Message} from "../models/message.model";
@@ -53,7 +53,11 @@ export class DataService {
   }
 
   getCurrentUser(){
-    return this.getUserList()[0];
+    let user = this.allUsers.getValue().find(user => user.id == this.currentIdUser);
+    if (user == undefined){
+      user = {id: -1, firstname: '', lastname:'', phone: '', mail: ''}
+    }
+    return user;
   }
 
   //retourne la liste de blogs de l'utilisateur actuel
@@ -62,27 +66,6 @@ export class DataService {
     return this.allBlogs.getValue().filter(blog =>
       blog.idUser == currentUser.id
     )
-  }
-
-  //retourne la liste des messages du blog acteul
-  getUserBlogMessages(){
-    let currentBlog = this.getCurrentBlog();
-    return this.allMessages.getValue().filter(message =>
-      message.idBlog == currentBlog.id
-    )
-  }
-
-  //Change le blog actuel
-  switchActualBlog(index: number) {
-    // Obtenir le blog sélectionné
-    const blog = this.allBlogs.getValue()[index];
-    // Obtenir la liste actuelle des blogs
-    const blogs = this.getBlogList();
-    // Déplacer le blog sélectionné au début de la liste
-    blogs.splice(index, 1); // Supprime le blog sélectionné de sa position actuelle
-    blogs.unshift(blog); // Ajoute le blog sélectionné au début de la liste
-    // Émettre la nouvelle valeur de la liste des blogs
-    this.allBlogs.next(blogs);
   }
 
   //supprime un message de la liste
@@ -129,8 +112,9 @@ export class DataService {
     }
   }
 
-  updateBlogList(){
-    this.allBlogs.next(this.allBlogs.getValue())
+  updateBlogList() {
+    const currentBlogs = this.allBlogs.getValue(); // Obtenir la valeur actuelle
+    this.allBlogs.next([...currentBlogs]); // Émettre une nouvelle valeur identique à la précédente
   }
 
   updateUserList(){
@@ -142,4 +126,19 @@ export class DataService {
   }
 
 
+  findUserByName(firstname: string) {
+    let user = this.allUsers.getValue().find(user => user.firstname == firstname);
+    if (user == undefined){
+      user = {id: -1, firstname: '', lastname:'', phone: '', mail: ''}
+    }
+    return user;
+  }
+
+  findBlogByName(title: string, user: User) {
+    let blog =  this.allBlogs.getValue().find(blog => blog.title == title);
+    if (blog == undefined){
+      blog = {id: -1, title: '', desc: '', idUser: -1}
+    }
+    return blog;
+  }
 }

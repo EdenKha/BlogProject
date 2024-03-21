@@ -7,6 +7,7 @@ import {BlogComponent} from "../blog/blog.component";
 import {Blog} from "../../models/blog.model";
 import {DataService} from "../../services/data.service";
 import {User} from "../../models/user.model";
+import {distinct} from "rxjs";
 
 @Component({
   selector: 'app-side-menu',

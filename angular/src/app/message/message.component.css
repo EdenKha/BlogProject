@@ -36,10 +36,28 @@
   font-size: 15px;
 }
 
+button{
+  margin-right: 10px;
+}
+
+button:hover{
+  background-color: #000;
+}
+
 h1{
   margin-bottom: 5px;
 }
 
 h3, p {
   background-color: #1F1F2E;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3D374B;
+  border-radius: 50px;
 }

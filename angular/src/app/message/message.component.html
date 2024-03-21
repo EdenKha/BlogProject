@@ -1,5 +1,8 @@
 <div>
-  <button (click)="removeMessage()">x</button>
+  <div class="action">
+    <button (click)="removeMessage()">del</button>
+    <button (click)="removeMessage()">mod</button>
+  </div>
   <h1 class = "NomUtilisateur">{{ currentUser?.firstname }}</h1>
 </div>
 

@@ -17,7 +17,8 @@ import {take} from "rxjs";
 })
 export class AjoutBlogComponent {
   blog: Blog = {id: 0, title: '', desc: '',idUser: -1 };
-  user!: User;
+  blogA: Blog = {id: 0, title: '', desc: '',idUser: -1 };
+  user: User = {id: 0, firstname:'', lastname:'', mail:'', phone:''};
 
   constructor(public dialogRef: MatDialogRef<AjoutBlogComponent>,
               private dialogService: DialogService,
@@ -45,5 +46,21 @@ export class AjoutBlogComponent {
   }
 
 
-
+  //Ne fonctionne pas bien
+  addBlog() {
+    /*this.user = this.dataService.findUserByName(this.user.firstname);
+    this.blogA = this.dataService.findBlogByName(this.blogA.title, this.user);
+    if (this.user.id!=-1 && this.blogA.id!=1){
+      this.blogA.idUser = this.dataService.currentIdUser;
+      this.dataService.addBlog(this.blogA);
+      this.dataService.setCurrentIdBlog(this.blogA.id)
+      this.dataService.updateMessageList();
+      this.dataService.updateBlogList();
+      this.dataService.updateUserList();
+      console.log(this.dataService.getBlogList())
+    } else {
+      console.log("Ce blog n'existe pas");
+    }
+    this.closeAddBlog();*/
+  }
 }
