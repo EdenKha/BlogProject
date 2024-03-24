@@ -43,8 +43,7 @@ export class FormMessageComponent {
       this.posts.unshift({ ...this.post });
       this.post.title = '';
       this.post.content = '';
-      this.dataService.addMessage(this.posts);
-      this.dataService.sendAllmessages(this.posts).subscribe((response) => {
+      this.dataService.addMessage(this.posts).subscribe((response) => {
         console.log(response);});
     } else {
       console.error("Erreur: Les champs title et content doivent être remplis.");

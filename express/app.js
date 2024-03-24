@@ -16,7 +16,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.post('/api', (req, res) => {
-    console.log('Bien recu');
+    console.log('Je suis le back jai Bien recu');
     fs.writeFile('express/data/messages.json', JSON.stringify(req.body, null, 2), (err) => {
         if (err) {
             console.error('Erreur d\'écriture du fichier :', err);

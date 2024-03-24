@@ -30,17 +30,6 @@ export class DataService {
   private url = 'http://localhost:3000/api';
   constructor(private http: HttpClient) { }
 
-  sendAllmessages(messages: Message[]): Observable<any> {
-    console.log('Bien envoyé');
-    return this.http.post(this.url, messages).pipe(
-      catchError(error => {
-        console.error('Error sending messages', error);
-        return throwError(error);
-      })
-    );
-  }
-
-
   getUserList(){
     return this.allUsers.getValue();
   }
@@ -54,7 +43,6 @@ export class DataService {
   }
 
   getAllMessages(): Observable<any> {
-    console.log(this.http.get<any>(this.url))
     return this.http.get<any>(this.url);
   }
 
@@ -134,6 +122,14 @@ export class DataService {
     } else {
       console.error("La liste des messages est indéfinie.");
     }
+    console.log('Je suis le front jai Bien envoyé');
+    return this.http.post(this.url,messages).pipe(
+      catchError(error => {
+        console.error('Error sending messages', error);
+        return throwError(error);
+      })
+    );
+
   }
 
   updateBlogList() {
