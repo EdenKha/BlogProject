@@ -1,45 +1,46 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const cors = require('cors');
+const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const app = express();
+const port = 3000;
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var blogsRouter = require('./routes/blogs');
+app.use(bodyParser.json());
 
-var app = express();
-
-// Middleware
-app.use(cors({
-  origin: 'http://localhost:4200' // Mettez ici l'URL de votre application Angular
-}));
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Routes
-app.use('/', indexRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/blogs', blogsRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS");
+    next();
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.post('/api', (req, res) => {
+    console.log('Bien recu');
+    fs.writeFile('express/data/messages.json', JSON.stringify(req.body, null, 2), (err) => {
+        if (err) {
+            console.error('Erreur d\'écriture du fichier :', err);
+            res.status(500).send('Erreur lors de l\'écriture du fichier');
+        } else {
+            res.send('POST request to the homepage');
+        }
+    });
 });
 
-module.exports = app;
+app.get('/api', (req, res) => {
+    console.log('Bien envoyé');
+    fs.readFile('express/data/messages.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Erreur de lecture du fichier :', err);
+            res.status(500).send('Erreur lors de la lecture du fichier');
+        } else {
+            res.json(JSON.parse(data));
+        }
+    });
+});
+
+
+// Démarrer le serveur
+app.listen(port, () => {
+    console.log(`Serveur démarré sur le port ${port}`);
+});

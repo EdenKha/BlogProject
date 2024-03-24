@@ -4,6 +4,8 @@ import { User } from "../../models/user.model";
 import { Message } from "../../models/message.model";
 import {FormsModule} from "@angular/forms";
 import {Blog} from "../../models/blog.model";
+import {HttpClient} from "@angular/common/http";
+import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'app-form-message',
@@ -27,7 +29,7 @@ export class FormMessageComponent {
   posts: Message[] = [];
   currentUser!: User;
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private http : HttpClient, private apiService : ApiService) {}
 
   onSubmit() {
     if (this.post.title && this.post.content && this.dataService.currentIdUser>0 ) {
@@ -42,8 +44,12 @@ export class FormMessageComponent {
       this.post.title = '';
       this.post.content = '';
       this.dataService.addMessage(this.posts);
+      this.dataService.sendAllmessages(this.posts).subscribe((response) => {
+        console.log(response);});
     } else {
       console.error("Erreur: Les champs title et content doivent être remplis.");
     }
+
+
   }
 }

@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  constructor(private http: HttpClient) { }
-  getMessage() {
-    return this.http.get(
-      'http://localhost:3000/api/message');
-  }
+  private url = 'http://localhost:3000/messages'; // URL de votre serveur Express.js
 
-  sendMessage(message: any) {
-    return this.http.post(
-      'http://localhost:3000/api/message', message);
+  constructor(private http: HttpClient) {}
+
+  // Méthode pour envoyer un fichier JSON au serveur
+  public sendJsonFile(jsonFile: any): Observable<any> {
+    return this.http.post<any>(this.url, jsonFile);
   }
 }

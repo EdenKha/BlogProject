@@ -6,6 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { BlogComponent } from './blog/blog.component';
 import { ListeMessageComponent } from './liste-message/liste-message.component';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {DataService} from "../services/data.service";
+import {ApiService} from "../services/api.service";
 
 export const routes: Routes = [
   { path: 'users/:userId', component: LoginComponent },
@@ -15,7 +18,8 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes),HttpClientModule],
+  exports: [RouterModule],
+  providers: [ApiService, DataService, HttpClient]
 })
 export class AppRoutingModule { }

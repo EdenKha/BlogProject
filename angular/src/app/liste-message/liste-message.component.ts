@@ -27,11 +27,14 @@ export class ListeMessageComponent implements OnInit {
   constructor(private dataService: DataService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.messages = this.dataService.getMessageList();
-    this.dataService.allMessagesO.pipe().subscribe(messages => {
-      this.messages = messages.filter(message => message.idBlog === this.dataService.currentIdBlog);
-      console.log(this.messages);
+    this.dataService.getAllMessages().subscribe(data => {
+      this.messages = data;
     });
+    this.messages = this.dataService.getMessageList();
+    //this.dataService.allMessagesO.pipe().subscribe(messages => {
+      //this.messages = messages.filter(message => message.idBlog === this.dataService.currentIdBlog);
+      //console.log(this.messages);
+    //});
   }
 
 

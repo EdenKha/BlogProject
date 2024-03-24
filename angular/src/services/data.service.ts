@@ -1,8 +1,10 @@
 import {ChangeDetectorRef, Injectable} from '@angular/core';
-import {BehaviorSubject, distinct} from "rxjs";
+import {BehaviorSubject, catchError, distinct, throwError} from "rxjs";
 import { User } from "../models/user.model";
 import {Blog} from "../models/blog.model";
 import {Message} from "../models/message.model";
+import {HttpClient} from "@angular/common/http";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,19 @@ export class DataService {
   currentIdBlog: number = 0;
   currentIdMessage = 0;
 
-  constructor() {}
+  private url = 'http://localhost:3000/api';
+  constructor(private http: HttpClient) { }
+
+  sendAllmessages(messages: Message[]): Observable<any> {
+    console.log('Bien envoyé');
+    return this.http.post(this.url, messages).pipe(
+      catchError(error => {
+        console.error('Error sending messages', error);
+        return throwError(error);
+      })
+    );
+  }
+
 
   getUserList(){
     return this.allUsers.getValue();
@@ -37,6 +51,11 @@ export class DataService {
 
   getMessageList(){
     return this.allMessages.getValue();
+  }
+
+  getAllMessages(): Observable<any> {
+    console.log(this.http.get<any>(this.url))
+    return this.http.get<any>(this.url);
   }
 
   setCurrentIdUser(id: number){
@@ -160,4 +179,5 @@ export class DataService {
     this.allUsers.getValue().splice(id, 1);
     this.allUsers.getValue().unshift(user);
   }
+
 }

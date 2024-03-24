@@ -9,6 +9,7 @@ import {NgForOf} from "@angular/common";
 import {DialogService} from "../services/dialog.service";
 import {LoginComponent} from "./login/login.component";
 import {MatDialog} from "@angular/material/dialog";
+import {JsonUploadComponent} from "./json-upload/json-upload.component";
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import {MatDialog} from "@angular/material/dialog";
     ListeMessageComponent,
     SideMenuComponent,
     HeaderComponent,
-    NgForOf
+    NgForOf,
+    JsonUploadComponent
   ],
   styleUrls: ['./app.component.css'],
   standalone: true
@@ -31,9 +33,6 @@ export class AppComponent implements OnInit {
 
   constructor(public dialog: MatDialog,private loginService: DialogService, private apiService: ApiService) { };
   ngOnInit() {
-    this.apiService.getMessage().subscribe(data => {
-      this.message = data;
-    });
     if (!this.loginService.isDialogCurrentlyOpen()) {
       const dialogRef = this.dialog.open(LoginComponent);
       dialogRef.afterClosed().subscribe(() => {
